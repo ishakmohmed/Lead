@@ -31,7 +31,6 @@ const get = async (key) => {
     const item = JSON.parse(value);
 
     if (!item) return null;
-
     if (isExpired(item)) {
       await AsyncStorage.removeItem(prefix + key);
       return null;
