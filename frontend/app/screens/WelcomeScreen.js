@@ -1,6 +1,7 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
+import WorkingTogetherAnimation from "../components/workingTogetherAnimation";
 import Screen from "../components/Screen";
 
 function WelcomeScreen() {
@@ -12,6 +13,7 @@ function WelcomeScreen() {
         }}
       >
         <Text style={styles.tagline}>Lead!</Text>
+        <WorkingTogetherAnimation />
       </View>
     </Screen>
   );
