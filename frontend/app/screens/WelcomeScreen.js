@@ -11,7 +11,7 @@ function WelcomeScreen() {
           flex: 1,
         }}
       >
-        <Text>Hello</Text>
+        <Text style={styles.tagline}>Lead!</Text>
       </View>
     </Screen>
   );
@@ -19,12 +19,17 @@ function WelcomeScreen() {
 
 const styles = StyleSheet.create({
   background: {
+    alignItems: "center",
     flex: 1,
     justifyContent: "flex-end",
-    alignItems: "center",
   },
   container: {
     padding: 10,
+  },
+  tagline: {
+    fontSize: 50,
+    fontWeight: "bold",
+    paddingVertical: 20,
   },
 });
 
