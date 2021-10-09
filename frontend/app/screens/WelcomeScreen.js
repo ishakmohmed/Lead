@@ -1,16 +1,31 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View, Text } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
-// import Button from "../components/Button";
-// import routes from "../navigation/routes";
-import colors from "../config/colors";
+import Screen from "../components/Screen";
 
-function WelcomeScreen({ navigation }) {
+function WelcomeScreen() {
   return (
-    <View>
-      <Text>This is Welcome Screen</Text>
-    </View>
+    <Screen style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <Text>Hello</Text>
+      </View>
+    </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  container: {
+    padding: 10,
+  },
+});
 
 export default WelcomeScreen;
