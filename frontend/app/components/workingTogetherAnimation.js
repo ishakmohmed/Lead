@@ -19,7 +19,7 @@ function WorkingTogetherAnimation() {
 const styles = StyleSheet.create({
   overlay: {
     backgroundColor: colors.white,
-    height: "50%",
+    height: "30%",
     opacity: 0.8,
     width: "100%",
     zIndex: 1,
