@@ -3,6 +3,6 @@ export default {
   darkGreen: "#002E27",
   green: "#00B14F",
   light: "#ede6e6",
-  medium: "#6e6969", 
+  medium: "#6e6969", // used
   white: "#FFFFFF", // used
 };
