@@ -26,8 +26,8 @@ function OfflineNotice() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: colors.red,
-    height: 100,
+    backgroundColor: colors.black,
+    height: 60,
     justifyContent: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     width: "100%",

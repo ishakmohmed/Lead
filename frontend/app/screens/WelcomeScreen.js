@@ -15,7 +15,7 @@ function WelcomeScreen({ navigation }) {
         <MaterialCommunityIcons
           style={styles.icon}
           name="crown-outline"
-          size={100}
+          size={80}
           color="black"
         />
         <View
@@ -26,9 +26,6 @@ function WelcomeScreen({ navigation }) {
         >
           <View style={styles.innerViewOne}>
             <Text style={styles.title}>Lead!</Text>
-            <Text style={styles.smallText}>
-              E-Voting App for UNITAR International University
-            </Text>
           </View>
           <WorkingTogetherAnimation />
           <View style={styles.innerViewTwo}>
@@ -49,6 +46,9 @@ function WelcomeScreen({ navigation }) {
               color="orange"
               onPress={() => navigation.navigate(routes.REGISTER)}
             />
+            <Text style={styles.smallText}>
+              E-Voting App for UNITAR International University
+            </Text>
           </View>
         </View>
       </View>
@@ -75,19 +75,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   innerViewOne: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   innerViewTwo: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   innerViewTwo: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   innerViewThree: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   smallText: {
     color: colors.medium,
+    fontWeight: "bold",
     textAlign: "center",
   },
   tagline: {

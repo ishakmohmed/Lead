@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import TabBar from "../components/TabBar";
 import LogoutScreen from "../screens/LogoutScreen";
 
 const Tab = createBottomTabNavigator();

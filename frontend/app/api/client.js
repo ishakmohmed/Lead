@@ -12,10 +12,12 @@ apiClient.get = async (url, params, axiosConfig) => {
 
   if (response.ok) {
     cache.store(url, response.data);
+
     return response;
   }
 
   const data = await cache.get(url);
+  
   return data ? { ok: true, data } : response;
 };
 
