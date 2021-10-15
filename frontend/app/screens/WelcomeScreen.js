@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import WorkingTogetherAnimation from "../components/workingTogetherAnimation";
 import Screen from "../components/Screen";
@@ -9,25 +10,45 @@ import colors from "../config/colors";
 function WelcomeScreen() {
   return (
     <Screen style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-        }}
-      >
-        <Text style={styles.title}>Lead!</Text>
-        <WorkingTogetherAnimation />
-        <View style={styles.innerViewOne}>
-          <Text style={styles.tagline}>
-            "The best of leaders are elected using the best of voting methods".
-          </Text>
-          <Text style={styles.ishak}>~ Mohmed Ishak, creator</Text>
-        </View>
-        <View style={styles.innerViewTwo}>
-          <Button
-            title="Login"
-            color="green"
-            onPress={() => navigation.navigate(routes.LOGIN)}
-          />
+      <View style={{ flex: 1 }}>
+        <MaterialCommunityIcons
+          style={styles.icon}
+          name="crown-outline"
+          size={100}
+          color="black"
+        />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+          }}
+        >
+          <View style={styles.innerViewOne}>
+            <Text style={styles.title}>Lead!</Text>
+            <Text style={styles.smallText}>
+              E-Voting App for UNITAR International University
+            </Text>
+          </View>
+          <WorkingTogetherAnimation />
+          <View style={styles.innerViewTwo}>
+            <Text style={styles.tagline}>
+              "The best of leaders are elected using the best of voting
+              methods".
+            </Text>
+            <Text style={styles.ishak}>~ Mohmed Ishak, creator</Text>
+          </View>
+          <View style={styles.innerViewThree}>
+            <Button
+              title="Login"
+              color="blue"
+              onPress={() => navigation.navigate(routes.LOGIN)}
+            />
+            <Button
+              title="Register"
+              color="orange"
+              onPress={() => navigation.navigate(routes.LOGIN)}
+            />
+          </View>
         </View>
       </View>
     </Screen>
@@ -43,20 +64,30 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
+  icon: {
+    textAlign: "center",
+  },
   ishak: {
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical: 10,
+    marginVertical: 5,
     textAlign: "center",
   },
   innerViewOne: {
-    marginVertical: 15,
-  },
-  innerViewOne: {
-    marginVertical: 15,
+    marginVertical: 10,
   },
   innerViewTwo: {
-    marginVertical: 15,
+    marginVertical: 10,
+  },
+  innerViewTwo: {
+    marginVertical: 10,
+  },
+  innerViewThree: {
+    marginVertical: 10,
+  },
+  smallText: {
+    color: colors.medium,
+    textAlign: "center",
   },
   tagline: {
     color: colors.medium,
