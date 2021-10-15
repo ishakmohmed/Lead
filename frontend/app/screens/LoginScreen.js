@@ -66,7 +66,7 @@ function LoginScreen() {
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton color="green" title="Login" />
+        <SubmitButton color="blue" title="Login" />
       </Form>
     </Screen>
   );

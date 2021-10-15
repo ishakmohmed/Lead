@@ -6,8 +6,9 @@ import WorkingTogetherAnimation from "../components/workingTogetherAnimation";
 import Screen from "../components/Screen";
 import Button from "../components/Button";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
-function WelcomeScreen() {
+function WelcomeScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
       <View style={{ flex: 1 }}>
@@ -46,7 +47,7 @@ function WelcomeScreen() {
             <Button
               title="Register"
               color="orange"
-              onPress={() => navigation.navigate(routes.LOGIN)}
+              onPress={() => navigation.navigate(routes.REGISTER)}
             />
           </View>
         </View>

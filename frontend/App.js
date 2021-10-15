@@ -1,15 +1,3 @@
-// import React from "react";
-
-// import WelcomeScreen from "./app/screens/WelcomeScreen";
-
-// export default function App() {
-//   return (
-//     <>
-//       <WelcomeScreen />
-//     </>
-//   );
-// }
-
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
