@@ -1,11 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import TabBar from "../components/TabBar";
-import OrderScreen from "../screens/OrderScreen";
-import QueueScreen from "../screens/QueueScreen";
-import AddFoodScreen from "../screens/AddFoodScreen";
-import MenuScreen from "../screens/MenuScreen";
 import LogoutScreen from "../screens/LogoutScreen";
 
 const Tab = createBottomTabNavigator();
@@ -15,22 +10,22 @@ const AppNavigator = () => {
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen
         name="queue"
-        component={QueueScreen}
+        component={LogoutScreen}
         initialParams={{ icon: "people" }}
       />
       <Tab.Screen
         name="order"
-        component={OrderScreen}
+        component={LogoutScreen}
         initialParams={{ icon: "grading" }}
       />
       <Tab.Screen
         name="+food"
-        component={AddFoodScreen}
+        component={LogoutScreen}
         initialParams={{ icon: "fastfood" }}
       />
       <Tab.Screen
         name="menu"
-        component={MenuScreen}
+        component={LogoutScreen}
         initialParams={{ icon: "restaurant-menu" }}
       />
       <Tab.Screen
