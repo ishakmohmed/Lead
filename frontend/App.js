@@ -22,7 +22,9 @@ export default function App() {
     return (
       <AppLoading
         startAsync={restoreUser}
-        onFinish={() => setIsReady(true)}
+        onFinish={() => {
+          setIsReady(true);
+        }}
         onError={() => console.log("Ouch, something is definitely wrong!")}
       />
     );

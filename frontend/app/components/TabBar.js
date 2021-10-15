@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { Dimensions, StatusBar, View, StyleSheet } from "react-native";
 
 import Tab from "./Tab";
 import colors from "../config/colors";
@@ -10,7 +10,7 @@ function TabBar({ navigation, state }) {
   const [selected, setSelected] = useState("queue");
   const { routes } = state;
   const renderColor = (currentTab) =>
-    currentTab === selected ? colors.orange : colors.white;
+    currentTab === selected ? colors.darkRed : colors.blue;
 
   const handlePress = (activeTab, index) => {
     if (state.index !== index) {
@@ -38,18 +38,18 @@ function TabBar({ navigation, state }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.black,
-    borderRadius: 25,
+    backgroundColor: colors.superLightGray,
     flexDirection: "row",
-    height: 80,
+    height: 70,
     justifyContent: "space-between",
-    width: "95%",
+    width: "100%",
   },
   wrapper: {
     alignItems: "center",
-    bottom: 20,
     justifyContent: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     position: "absolute",
+    bottom: 0,
     width,
   },
 });
