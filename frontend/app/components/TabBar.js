@@ -7,7 +7,7 @@ import colors from "../config/colors";
 const { width } = Dimensions.get("screen");
 
 function TabBar({ navigation, state }) {
-  const [selected, setSelected] = useState("queue");
+  const [selected, setSelected] = useState("vote");
   const { routes } = state;
   const renderColor = (currentTab) =>
     currentTab === selected ? colors.darkRed : colors.blue;
