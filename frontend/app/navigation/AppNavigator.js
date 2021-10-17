@@ -10,44 +10,29 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen
-        name="vote"
+        name="queue"
         component={LogoutScreen}
-        initialParams={{ icon: "vote-yea" }}
-        options={{
-          headerShown: false,
-        }}
+        initialParams={{ icon: "people" }}
       />
       <Tab.Screen
-        name="result"
+        name="order"
         component={LogoutScreen}
-        initialParams={{ icon: "percentage" }}
-        options={{
-          headerShown: false,
-        }}
+        initialParams={{ icon: "grading" }}
       />
       <Tab.Screen
-        name="add"
+        name="+food"
         component={LogoutScreen}
-        initialParams={{ icon: "plus-square" }}
-        options={{
-          headerShown: false,
-        }}
+        initialParams={{ icon: "fastfood" }}
       />
       <Tab.Screen
-        name="edit"
+        name="menu"
         component={LogoutScreen}
-        initialParams={{ icon: "user-edit" }}
-        options={{
-          headerShown: false,
-        }}
+        initialParams={{ icon: "restaurant-menu" }}
       />
       <Tab.Screen
         name="logout"
         component={LogoutScreen}
-        initialParams={{ icon: "running" }}
-        options={{
-          headerShown: false,
-        }}
+        initialParams={{ icon: "logout" }}
       />
     </Tab.Navigator>
   );
