@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 function Tab({ color, icon, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      {icon && <MaterialIcons name={icon} size={30} color={color} />}
+      {icon && <FontAwesome5 name={icon} size={24} color={color} />}
     </TouchableOpacity>
   );
 }

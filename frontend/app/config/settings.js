@@ -2,13 +2,13 @@ import Constants from "expo-constants";
 
 const settings = {
   dev: {
-    apiUrl: "https://fair-burger-node-backend.herokuapp.com",
+    apiUrl: "http://192.168.1.8:5000",
   },
   staging: {
-    apiUrl: "https://fair-burger-node-backend.herokuapp.com",
+    apiUrl: "http://192.168.1.8:5000",
   },
   prod: {
-    apiUrl: "https://fair-burger-node-backend.herokuapp.com",
+    apiUrl: "http://192.168.1.8:5000",
   },
 };
 

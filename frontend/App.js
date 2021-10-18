@@ -33,9 +33,7 @@ export default function App() {
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
-        {/* {user ? <AppNavigator /> : <AuthNavigator />} */}
-        <AppNavigator />
-        {/* <AuthNavigator /> */}
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
   );
