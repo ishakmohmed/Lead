@@ -13,6 +13,7 @@ import Text from "../components/Text";
 import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
 import colors from "../config/colors";
+import HeadingText from "../components/HeadingText";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -34,6 +35,7 @@ function LoginScreen() {
 
   return (
     <Screen style={styles.container}>
+      <HeadingText>Login</HeadingText>
       <Form
         initialValues={{
           email: "",
@@ -75,6 +77,7 @@ function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    justifyContent: "center",
   },
   logo: {
     alignSelf: "center",

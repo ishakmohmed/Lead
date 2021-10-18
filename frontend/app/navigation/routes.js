@@ -1,4 +1,8 @@
 export default Object.freeze({
-  LOGIN: "Login",
-  REGISTER: "Register",
+  LOGIN: "login",
+  REGISTER: "register",
+  VOTE: "vote",
+  RESULTS: "results",
+  ADD: "add",
+  EDIT: "edit",
 });

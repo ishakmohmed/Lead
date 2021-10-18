@@ -10,7 +10,7 @@ function TabBar({ navigation, state }) {
   const [selected, setSelected] = useState("vote");
   const { routes } = state;
   const renderColor = (currentTab) =>
-    currentTab === selected ? colors.darkRed : colors.blue;
+    currentTab === selected ? colors.nicePink : colors.blue;
 
   const handlePress = (activeTab, index) => {
     if (state.index !== index) {

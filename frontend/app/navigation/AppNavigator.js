@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import TabBar from "../components/TabBar";
 import LogoutScreen from "../screens/LogoutScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import routes from "./routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -10,29 +12,36 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen
-        name="vote"
+        options={{
+          headerShown: false,
+        }}
+        name={routes.VOTE}
         component={LogoutScreen}
         initialParams={{ icon: "vote-yea" }}
       />
       <Tab.Screen
-        name="results"
+        options={{
+          headerShown: false,
+        }}
+        name={routes.RESULTS}
         component={LogoutScreen}
         initialParams={{ icon: "trophy" }}
       />
       <Tab.Screen
-        name="add"
+        options={{
+          headerShown: false,
+        }}
+        name={routes.ADD}
         component={LogoutScreen}
         initialParams={{ icon: "plus-circle" }}
       />
       <Tab.Screen
-        name="edit"
-        component={LogoutScreen}
+        options={{
+          headerShown: false,
+        }}
+        name={routes.EDIT}
+        component={ProfileScreen}
         initialParams={{ icon: "user-edit" }}
-      />
-      <Tab.Screen
-        name="logout"
-        component={LogoutScreen}
-        initialParams={{ icon: "running" }}
       />
     </Tab.Navigator>
   );

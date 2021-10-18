@@ -43,7 +43,7 @@ function WelcomeScreen({ navigation }) {
             />
             <Button
               title="Register"
-              color="darkRed"
+              color="nicePink"
               onPress={() => navigation.navigate(routes.REGISTER)}
             />
             <Text style={styles.smallText}>

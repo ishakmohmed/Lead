@@ -16,6 +16,7 @@ import useApi from "../hooks/useApi";
 import ActivityIndicator from "../components/ActivityIndicator";
 import Text from "../components/Text";
 import colors from "../config/colors";
+import HeadingText from "../components/HeadingText";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -53,6 +54,7 @@ function RegisterScreen() {
     <>
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
+        <HeadingText>Register</HeadingText>
         <Form
           initialValues={{ name: "", email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}
@@ -94,7 +96,7 @@ function RegisterScreen() {
             secureTextEntry
             textContentType="password"
           />
-          <SubmitButton color="darkRed" title="Register" />
+          <SubmitButton color="nicePink" title="Register" />
         </Form>
       </Screen>
     </>
@@ -104,6 +106,7 @@ function RegisterScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    justifyContent: "center",
   },
   text: {
     color: colors.black,
