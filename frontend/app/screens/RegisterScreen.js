@@ -20,6 +20,7 @@ import colors from "../config/colors";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
+  bio: Yup.string().required().min(5).max(50).label("bio"),
   password: Yup.string().required().min(4).label("Password"),
 });
 
@@ -74,6 +75,14 @@ function RegisterScreen() {
             name="email"
             placeholder="Email"
             textContentType="emailAddress"
+          />
+          <Text style={styles.text}>Bio</Text>
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="pen"
+            name="bio"
+            placeholder="Bio..."
           />
           <Text style={styles.text}>Password</Text>
           <FormField

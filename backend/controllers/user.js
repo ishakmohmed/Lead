@@ -16,7 +16,7 @@ const authenticateUser = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, bio, password } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -28,6 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const createdUser = await User.create({
     name,
     email,
+    bio,
     password,
   });
 
@@ -36,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: createdUser._id,
       name: createdUser.name,
       email: createdUser.email,
+      bio: createdUser.bio,
       token: generateToken(createdUser._id),
     });
   } else {
