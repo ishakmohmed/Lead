@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "apisauce";
 
 const customAxiosInstance = axios.create({
-  baseURL: process.env.CLOUDINARY_URL,
+  baseURL: "INSERT CLOUDINARY URL",
 });
 
 const apisauceInstance = create({ axiosInstance: customAxiosInstance });
