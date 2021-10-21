@@ -17,6 +17,7 @@ import ActivityIndicator from "../components/ActivityIndicator";
 import Text from "../components/Text";
 import colors from "../config/colors";
 import HeadingText from "../components/HeadingText";
+import ImageUpload from "../components/ImageUpload";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -60,6 +61,7 @@ function RegisterScreen() {
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={validationSchema}
         >
+          <ImageUpload />
           <ErrorMessage error={error} visible={error} />
           <Text style={styles.text}>Name</Text>
           <FormField
