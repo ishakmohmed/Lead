@@ -27,12 +27,20 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
+  const [error, setError] = useState();
+  const [profilePic, setProfilePic] = useState("");
   const registerApi = useApi(userApi.register);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
-  const [error, setError] = useState();
 
   const handleSubmit = async (userInfo) => {
+    if (!userInfo) return setError("Please upload a profile pic.");
+
+    // I needa send this to upload pic to cloudinary and add that URL to userInfo right here.
+
+    userInfo.profilePic = profilePic;
+    console.log("Now the user info is ", userInfo);
+
     const result = await registerApi.request(userInfo);
 
     if (!result.ok) {
@@ -61,7 +69,7 @@ function RegisterScreen() {
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={validationSchema}
         >
-          <ImageUpload />
+          <ImageUpload profilePic={profilePic} setProfilePic={setProfilePic} />
           <ErrorMessage error={error} visible={error} />
           <Text style={styles.text}>Name</Text>
           <FormField

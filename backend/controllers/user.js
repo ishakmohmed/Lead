@@ -4,20 +4,18 @@ import User from "../models/user.js";
 
 const authenticateUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (user && (await user.matchPassword(password)))
     res.json(generateToken(user._id));
-  } else {
+  else {
     res.status(401);
     throw new Error("Invalid email or password.");
   }
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, bio, password } = req.body;
-
+  const { name, email, bio, profilePic, password } = req.body;
   const user = await User.findOne({ email });
 
   if (user) {
@@ -29,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     bio,
+    profilePic,
     password,
   });
 
@@ -38,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: createdUser.name,
       email: createdUser.email,
       bio: createdUser.bio,
+      profilePic,
       token: generateToken(createdUser._id),
     });
   } else {
