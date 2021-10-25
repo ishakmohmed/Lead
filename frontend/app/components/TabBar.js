@@ -10,7 +10,7 @@ function TabBar({ navigation, state }) {
   const [selected, setSelected] = useState("vote");
   const { routes } = state;
   const renderColor = (currentTab) =>
-    currentTab === selected ? colors.nicePink : colors.black;
+    currentTab === selected ? colors.nicePink : colors.medium;
 
   const handlePress = (activeTab, index) => {
     if (state.index !== index) {
@@ -38,9 +38,11 @@ function TabBar({ navigation, state }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.superLightGray,
+    backgroundColor: colors.white,
+    borderTopColor: colors.superLightGray,
+    borderTopWidth: 1,
     flexDirection: "row",
-    height: 50,
+    height: 70,
     justifyContent: "space-between",
     width: "100%",
   },
