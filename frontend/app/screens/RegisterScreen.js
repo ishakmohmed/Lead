@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import * as Yup from "yup";
+import axios from "axios";
+import ImgToBase64 from "react-native-image-base64";
 
 import Screen from "../components/Screen";
 import {
@@ -33,13 +35,50 @@ function RegisterScreen() {
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
 
+  const uploadPic = async (media) => {
+    try {
+      const form = new FormData();
+
+      form.append("file", media);
+      form.append("upload_preset", "hit_me_up");
+      form.append("cloud_name", "ishaks_cloudinary");
+
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/ishaks-cloudinary/image/upload",
+        form
+      );
+
+      console.log("CALLED");
+
+      console.log("dude, res.data.url is >>> ", res.data.url);
+
+      return res.data.url;
+    } catch (error) {
+      return;
+    }
+  };
+
   const handleSubmit = async (userInfo) => {
     if (!userInfo) return setError("Please upload a profile pic.");
 
-    // I needa send this to upload pic to cloudinary and add that URL to userInfo right here.
+    console.log("profile pic is >>> ", profilePic);
 
-    userInfo.profilePic = profilePic;
-    console.log("Now the user info is ", userInfo);
+    try {
+      console.log("nice001");
+      // problem: next commandssss are not executed >
+      ImgToBase64.getBase64String(profilePic).then((base64String) =>
+        setProfilePic(base64String)
+      );
+      console.log("nice002");
+    } catch (error) {
+      return;
+    }
+
+    console.log("but now, ", profilePic);
+
+    const profilePicFromCloudinary = await uploadPic(profilePic); // implement!
+
+    userInfo.profilePic = profilePicFromCloudinary;
 
     const result = await registerApi.request(userInfo);
 
@@ -49,6 +88,7 @@ function RegisterScreen() {
         setError("An unexpected error occurred.");
         console.log(result);
       }
+
       return;
     }
 
