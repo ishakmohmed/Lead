@@ -11,11 +11,9 @@ function ErrorMessage({ error, visible }) {
 
 const styles = StyleSheet.create({
   error: {
-    backgroundColor: colors.darkRed,
-    borderRadius: 10,
-    color: colors.white,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    color: colors.darkRed,
+    fontSize: 12,
+    fontWeight: "bold",
     textAlign: "center",
   },
 });

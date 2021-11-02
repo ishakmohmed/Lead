@@ -5,7 +5,11 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
-function ImageUpload({ profilePic, setProfilePic }) {
+function ImageUpload({
+  profilePic,
+  setProfilePic,
+  setFullReponseFromImagePicker,
+}) {
   const openImageLibrary = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -15,9 +19,19 @@ function ImageUpload({ profilePic, setProfilePic }) {
       const response = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
+        base64: true,
+        quality: 1,
       });
 
-      if (!response.cancelled) setProfilePic(response.uri);
+      if (!response.cancelled) {
+        try {
+          setProfilePic(response.uri);
+          setFullReponseFromImagePicker(response);
+          // A better implementation would be to send just the entire response to parent instead of sending the reponse + response.uri and then the parent can derive whatever sub values from this big response object
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
   };
 
@@ -37,8 +51,8 @@ function ImageUpload({ profilePic, setProfilePic }) {
           <>
             <Text
               style={{
-                color: colors.medium,
-                fontSize: 16,
+                color: colors.black,
+                fontSize: 12,
                 fontWeight: "bold",
                 margin: 10,
                 textAlign: "center",
@@ -49,7 +63,7 @@ function ImageUpload({ profilePic, setProfilePic }) {
             <FontAwesome5
               name="cloud-upload-alt"
               size={20}
-              color={colors.medium}
+              color={colors.black}
             />
           </>
         )}
@@ -67,11 +81,11 @@ const styles = StyleSheet.create({
   uploadBtn: {
     alignItems: "center",
     backgroundColor: colors.superLightGray,
-    borderRadius: 125 / 2,
-    height: 125,
+    borderRadius: 100 / 2,
+    height: 100,
     justifyContent: "center",
     overflow: "hidden",
-    width: 125,
+    width: 100,
   },
 });
 

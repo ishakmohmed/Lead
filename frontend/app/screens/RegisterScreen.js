@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import axios from "axios";
-import ImgToBase64 from "react-native-image-base64";
 
 import Screen from "../components/Screen";
 import {
@@ -24,79 +22,79 @@ import ImageUpload from "../components/ImageUpload";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
-  bio: Yup.string().required().min(5).max(50).label("bio"),
+  bio: Yup.string().required().min(5).max(50).label("Bio"),
   password: Yup.string().required().min(4).label("Password"),
 });
 
 function RegisterScreen() {
   const [error, setError] = useState();
   const [profilePic, setProfilePic] = useState("");
+  const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
+    useState("");
   const registerApi = useApi(userApi.register);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
 
-  const uploadPic = async (media) => {
-    try {
-      const form = new FormData();
+  const uploadPicToCloudinaryAndGetPicUrl = async () => {
+    let base64Img = `data:image/jpg;base64,${fullReponseFromImagePicker.base64}`;
+    let data = {
+      file: base64Img,
+      upload_preset: "hit_me_up",
+    };
 
-      form.append("file", media);
-      form.append("upload_preset", "hit_me_up");
-      form.append("cloud_name", "ishaks_cloudinary");
+    const url = await fetch(
+      "https://api.cloudinary.com/v1_1/ishaks-cloudinary/image/upload",
+      {
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+        },
+        method: "POST",
+      }
+    )
+      .then(async (r) => {
+        let data = await r.json();
 
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/ishaks-cloudinary/image/upload",
-        form
-      );
+        return data.secure_url;
+      })
+      .catch((err) => console.log(err));
 
-      console.log("CALLED");
-
-      console.log("dude, res.data.url is >>> ", res.data.url);
-
-      return res.data.url;
-    } catch (error) {
-      return;
-    }
+    return url;
   };
 
   const handleSubmit = async (userInfo) => {
-    if (!userInfo) return setError("Please upload a profile pic.");
-
-    console.log("profile pic is >>> ", profilePic);
-
     try {
-      console.log("nice001");
-      // problem: next commandssss are not executed >
-      ImgToBase64.getBase64String(profilePic).then((base64String) =>
-        setProfilePic(base64String)
+      if (!profilePic) return setError("Please upload a profile pic.");
+      else setError("");
+
+      const profilePicFromCloudinary =
+        await uploadPicToCloudinaryAndGetPicUrl();
+
+      if (!profilePicFromCloudinary)
+        return setError("Please upload pic again.");
+
+      userInfo.profilePic = profilePicFromCloudinary;
+
+      const result = await registerApi.request(userInfo);
+
+      if (!result.ok) {
+        if (result.data) setError(result.data.error);
+        else {
+          setError("An unexpected error occurred.");
+          console.log(result);
+        }
+
+        return;
+      }
+
+      const { data: authToken } = await loginApi.request(
+        userInfo.email,
+        userInfo.password
       );
-      console.log("nice002");
+      auth.logIn(authToken);
     } catch (error) {
       return;
     }
-
-    console.log("but now, ", profilePic);
-
-    const profilePicFromCloudinary = await uploadPic(profilePic); // implement!
-
-    userInfo.profilePic = profilePicFromCloudinary;
-
-    const result = await registerApi.request(userInfo);
-
-    if (!result.ok) {
-      if (result.data) setError(result.data.error);
-      else {
-        setError("An unexpected error occurred.");
-        console.log(result);
-      }
-
-      return;
-    }
-
-    const { data: authToken } = await loginApi.request(
-      userInfo.email,
-      userInfo.password
-    );
-    auth.logIn(authToken);
   };
 
   return (
@@ -109,8 +107,12 @@ function RegisterScreen() {
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={validationSchema}
         >
-          <ImageUpload profilePic={profilePic} setProfilePic={setProfilePic} />
           <ErrorMessage error={error} visible={error} />
+          <ImageUpload
+            profilePic={profilePic}
+            setProfilePic={setProfilePic}
+            setFullReponseFromImagePicker={setFullReponseFromImagePicker}
+          />
           <Text style={styles.text}>Name</Text>
           <FormField
             autoCorrect={false}
