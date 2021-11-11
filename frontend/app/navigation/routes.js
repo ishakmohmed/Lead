@@ -4,5 +4,5 @@ export default Object.freeze({
   VOTE: "vote",
   RESULTS: "results",
   ADD: "add",
-  EDIT: "edit",
+  ACCOUNT: "account",
 });

@@ -1,17 +1,35 @@
-import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 import Screen from "../components/Screen";
-import Button from "../components/Button";
 import AuthContext from "../auth/context";
+import Button from "../components/Button";
+import HeadingText from "../components/HeadingText";
+import ImageUpload from "../components/ImageUpload";
 
-function LogoutScreen() {
-  const { setUser } = useContext(AuthContext);
+function ProfileScreen() {
+  const { user, setUser } = useContext(AuthContext);
+  const [profilePic, setProfilePic] = useState("");
+  const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
+    useState("");
 
   return (
     <Screen>
       <View style={styles.container}>
         <Button color="blue" title="Logout!" onPress={() => setUser(null)} />
+        <HeadingText>Update Profile</HeadingText>
+        <ImageUpload
+          profilePic={profilePic}
+          setProfilePic={setProfilePic}
+          setFullReponseFromImagePicker={setFullReponseFromImagePicker}
+        />
+
+        {/* JUST MAKE THIS COMPONENT DISPLAY THE PIC */}
+        {/* <ImageUpload
+          profilePic={user.profilePic}
+          setProfilePic={setProfilePic}
+          setFullReponseFromImagePicker={setFullReponseFromImagePicker}
+        /> */}
       </View>
     </Screen>
   );
@@ -25,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogoutScreen;
+export default ProfileScreen;

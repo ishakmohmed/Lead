@@ -31,17 +31,17 @@ const AppNavigator = () => {
         options={{
           headerShown: false,
         }}
-        name={routes.EDIT}
-        component={ProfileScreen}
-        initialParams={{ icon: "user-edit" }}
+        name={routes.ADD}
+        component={LogoutScreen}
+        initialParams={{ icon: "crown" }}
       />
       <Tab.Screen
         options={{
           headerShown: false,
         }}
-        name={routes.ADD}
-        component={LogoutScreen}
-        initialParams={{ icon: "plus-circle" }}
+        name={routes.ACCOUNT}
+        component={ProfileScreen}
+        initialParams={{ icon: "user-edit" }}
       />
     </Tab.Navigator>
   );
