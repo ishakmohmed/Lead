@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabBar from "../components/TabBar";
 import LogoutScreen from "../screens/LogoutScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import AddSessionScreen from "../screens/AddSessionScreen";
 import routes from "./routes";
 
 const Tab = createBottomTabNavigator();
@@ -32,7 +33,7 @@ const AppNavigator = () => {
           headerShown: false,
         }}
         name={routes.ADD}
-        component={LogoutScreen}
+        component={AddSessionScreen}
         initialParams={{ icon: "crown" }}
       />
       <Tab.Screen

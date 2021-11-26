@@ -49,3 +49,5 @@ const votingSessionSchema = mongoose.Schema({
     default: Date.now(),
   },
 });
+
+export default mongoose.model("VotingSession", votingSessionSchema);
