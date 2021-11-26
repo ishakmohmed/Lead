@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import Screen from "../components/Screen";
 import AuthContext from "../auth/context";
@@ -23,13 +23,6 @@ function ProfileScreen() {
           setProfilePic={setProfilePic}
           setFullReponseFromImagePicker={setFullReponseFromImagePicker}
         />
-
-        {/* JUST MAKE THIS COMPONENT DISPLAY THE PIC */}
-        {/* <ImageUpload
-          profilePic={user.profilePic}
-          setProfilePic={setProfilePic}
-          setFullReponseFromImagePicker={setFullReponseFromImagePicker}
-        /> */}
       </View>
     </Screen>
   );
