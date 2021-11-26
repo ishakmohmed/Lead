@@ -11,15 +11,41 @@ const votingSessionSchema = mongoose.Schema({
     minlength: 5,
     maxlength: 20,
   },
-  candidates,
+  candidates: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+  ],
   isGoingOn: {
     type: Boolean,
     default: true,
   },
-  creatorId,
-  dateCreated,
-  votersCount,
-  highestVotersCount,
-  winner,
-  dateEnded,
+  creatorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  dateCreated: {
+    type: Date,
+    default: Date.now(),
+  },
+  votersCount: {
+    type: Number,
+    default: 0,
+  },
+  highestVotersCount: {
+    type: Number,
+    default: 0,
+  },
+  winner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  dateEnded: {
+    type: Date,
+    default: Date.now(),
+  },
 });
