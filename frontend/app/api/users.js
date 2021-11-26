@@ -1,6 +1,6 @@
 import client from "./client";
 
 const register = (userInfo) => client.post("/api/users", userInfo);
-const getAllUsers = () => client.post("/api/users");
+const getAllUsers = () => client.get("/api/users");
 
 export default { getAllUsers, register };

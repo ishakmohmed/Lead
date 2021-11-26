@@ -13,21 +13,21 @@ const App = () => {
   const [masterData, setMasterData] = useState([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, []);
 
-  const fetchPosts = () => {
-    const apiURL = "https://jsonplaceholder.typicode.com/posts";
+  // const fetchPosts = () => {
+  //   const apiURL = "https://jsonplaceholder.typicode.com/posts";
 
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setFilteredData(responseJson);
-        setMasterData(responseJson);
-      })
-      .catch((error) => console.error(error));
-  };
+  //   fetch(apiURL)
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       setFilteredData(responseJson);
+  //       setMasterData(responseJson);
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
 
   const searchFilter = (textThatTheUserTypesInRealTime) => {
     if (textThatTheUserTypesInRealTime) {
