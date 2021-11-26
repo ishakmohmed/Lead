@@ -2,6 +2,16 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/user.js";
 
+const getAllUsers = asyncHandler(async (req, res) => {
+  const allUsers = await User.find({});
+
+  if (allUsers) res.json(allUsers);
+  else {
+    res.status(404);
+    throw new Error("Database has no user.");
+  }
+});
+
 const authenticateUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -46,4 +56,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authenticateUser, registerUser };
+export { authenticateUser, getAllUsers, registerUser };

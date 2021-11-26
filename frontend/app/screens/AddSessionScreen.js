@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -17,39 +17,44 @@ const validationSchema = Yup.object().shape({
 });
 
 function ProfileScreen() {
-  const handleSubmit = async ({ email, password }) => {
-    const result = await authApi.login(email, password);
+  const [hasErrorForNameOfSession, setHasErrorForNameOfSession] =
+    useState(false);
+  const [hasErrorForCandidates, setHasErrorForCandidates] = useState(false);
+  const [allUsers, setAllUsers] = useState([]);
 
-    if (!result.ok) return setLoginFailed(true);
-    setLoginFailed(false);
-
-    logIn(result.data);
+  const handleSubmit = async (data) => {
+    console.log("dude, the data is ", data);
   };
+
+  useEffect(() => {
+    
+  }, []);
 
   return (
     <Screen style={styles.container}>
       <HeadingText>Add Session</HeadingText>
       <Form
         initialValues={{
-          email: "",
-          password: "",
+          nameOfSession: "",
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <ErrorMessage
-          error="Invalid email and/or password"
-          visible={loginFailed}
+          error="Name of session must be of length 5 to 20."
+          visible={hasErrorForNameOfSession}
         />
-        <Text style={styles.text}>Email</Text>
+        <ErrorMessage
+          error="You must select 2 to 5 candidates only."
+          visible={hasErrorForCandidates}
+        />
+        <Text style={styles.text}>Name of Session</Text>
         <FormField
           autoCapitalize="none"
           autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="masteruser@email.com"
-          textContentType="emailAddress"
+          icon="vote"
+          name="nameOfSession"
+          placeholder="President of IT Club..."
         />
       </Form>
     </Screen>

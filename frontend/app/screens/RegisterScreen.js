@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
     useState("");
