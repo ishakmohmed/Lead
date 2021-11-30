@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
+import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
@@ -35,6 +35,8 @@ function ProfileScreen() {
     const { data: usersFromBackend } = await getAllUserApi.request();
 
     setAllUsers(usersFromBackend);
+
+    console.log("ALL USERS ARE ", allUsers);
   };
 
   const handleSubmit = async (data) => {
@@ -50,17 +52,17 @@ function ProfileScreen() {
         return itemData.indexOf(textData) > -1;
       });
 
-      setFilteredData(newData);
+      setFilteredUsers(newData);
       setSearch(textThatTheUserTypesInRealTime);
     } else {
-      setFilteredData(allUsers);
+      setFilteredUsers(allUsers);
       setSearch(textThatTheUserTypesInRealTime);
     }
   };
 
   const ItemView = ({ item }) => {
     return (
-      <Text style={styles.itemStyle}>
+      <Text style={{ fontSize: 20 }}>
         {item._id}
         {". "}
         {item.name.toUpperCase()}
@@ -102,6 +104,19 @@ function ProfileScreen() {
           name="nameOfSession"
           placeholder="President of IT Club..."
         />
+        <TextInput
+          style={styles.textInputStyle}
+          value={search}
+          placeholder="Search something..."
+          underlineColorAndroid="transparent"
+          onChangeText={(text) => searchFilter(text)}
+        />
+        <FlatList
+          data={filteredUsers}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
       </Form>
     </Screen>
   );
@@ -118,6 +133,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginTop: 5,
+  },
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: "#009688",
+    backgroundColor: "white",
   },
 });
 
