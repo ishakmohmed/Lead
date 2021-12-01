@@ -17,7 +17,6 @@ import { ErrorMessage, Form, FormField } from "../components/forms";
 import userApi from "../api/users";
 import useApi from "../hooks/useApi";
 import defaultStyles from "../config/styles";
-import Button from "../components/Button";
 
 const validationSchema = Yup.object().shape({
   nameOfSession: Yup.string()
@@ -90,7 +89,12 @@ function ProfileScreen() {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log("LOL")}
+          onPress={() => {
+            setSelectedUsersAsCandidates([
+              ...selectedUsersAsCandidates,
+              { _id: item._id, profilePic: item.profilePic },
+            ]);
+          }}
         >
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
@@ -151,7 +155,11 @@ function ProfileScreen() {
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
+          style={styles.flatList}
         />
+        <View>
+          <Text style={styles.text}>Selected Candidates</Text>
+        </View>
       </Form>
     </Screen>
   );
@@ -175,6 +183,13 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  flatList: {
+    borderColor: colors.superLightGray,
+    borderWidth: 0.5,
+    flexGrow: 0,
+    height: 200,
+    padding: 10,
   },
   makeItRound: {
     alignItems: "center",
