@@ -88,11 +88,12 @@ function ProfileScreen() {
             ? item.name.substring(0, 10) + "..."
             : item.name}
         </Text>
-        <Button
-          title="Add"
-          onPress={() => console.log("DAMN!")}
-          color="black"
-        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => console.log("LOL")}
+        >
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -157,6 +158,19 @@ function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: colors.nicePink,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    width: 70,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   container: {
     padding: 10,
     paddingLeft: 20,
