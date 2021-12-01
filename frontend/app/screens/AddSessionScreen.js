@@ -17,6 +17,7 @@ import { ErrorMessage, Form, FormField } from "../components/forms";
 import userApi from "../api/users";
 import useApi from "../hooks/useApi";
 import defaultStyles from "../config/styles";
+import Button from "../components/Button";
 
 const validationSchema = Yup.object().shape({
   nameOfSession: Yup.string()
@@ -32,6 +33,9 @@ function ProfileScreen() {
   const [hasErrorForCandidates, setHasErrorForCandidates] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedUsersAsCandidates, setSelectedUsersAsCandidates] = useState(
+    []
+  );
   const [search, setSearch] = useState("");
   const getAllUserApi = useApi(userApi.getAllUsers);
 
@@ -69,11 +73,6 @@ function ProfileScreen() {
   const ItemView = ({ item }) => {
     return (
       <View style={styles.userSearchView}>
-        {/* <Text style={{ fontSize: 20 }}>
-          {item._id}
-          {". "}
-          {item.name.toUpperCase()}
-        </Text> */}
         <TouchableOpacity style={styles.makeItRound}>
           <Image
             source={{
@@ -84,7 +83,16 @@ function ProfileScreen() {
             }}
           />
         </TouchableOpacity>
-        <Text style={styles.text}>{item.name}</Text>
+        <Text style={styles.text}>
+          {item.name.length > 10
+            ? item.name.substring(0, 10) + "..."
+            : item.name}
+        </Text>
+        <Button
+          title="Add"
+          onPress={() => console.log("DAMN!")}
+          color="black"
+        />
       </View>
     );
   };
