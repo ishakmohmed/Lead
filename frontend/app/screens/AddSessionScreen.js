@@ -230,9 +230,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   selectedCandidatesContainer: {
+    backgroundColor: colors.light,
+    borderRadius: 20,
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "red",
+    justifyContent: "center",
+    marginVertical: 10,
+    padding: 10,
   },
   text: {
     color: colors.black,
