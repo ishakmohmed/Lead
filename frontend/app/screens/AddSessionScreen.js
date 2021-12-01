@@ -158,7 +158,7 @@ function ProfileScreen() {
           style={styles.flatList}
         />
         <Text style={styles.text}>Selected Candidates</Text>
-        {/* <View stlye={styles.selectedCandidatesContainer}>
+        <View style={styles.selectedCandidatesContainer}>
           <TouchableOpacity style={styles.makeItRound}>
             <Image
               source={{
@@ -179,7 +179,7 @@ function ProfileScreen() {
               }}
             />
           </TouchableOpacity>
-        </View> */}
+        </View>
       </Form>
     </Screen>
   );
@@ -229,11 +229,11 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "100%",
   },
-  // selectedCandidatesContainer: {
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   backgroundColor: "red",
-  // },
+  selectedCandidatesContainer: {
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "red",
+  },
   text: {
     color: colors.black,
     fontSize: 16,
