@@ -157,9 +157,29 @@ function ProfileScreen() {
           renderItem={ItemView}
           style={styles.flatList}
         />
-        <View>
-          <Text style={styles.text}>Selected Candidates</Text>
-        </View>
+        <Text style={styles.text}>Selected Candidates</Text>
+        {/* <View stlye={styles.selectedCandidatesContainer}>
+          <TouchableOpacity style={styles.makeItRound}>
+            <Image
+              source={{
+                width: 50,
+                height: 50,
+                resizeMode: "cover",
+                uri: "https://res.cloudinary.com/ishaks-cloudinary/image/upload/v1636629293/vpcqhfajs2j6vdepthin.jpg",
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.makeItRound}>
+            <Image
+              source={{
+                width: 50,
+                height: 50,
+                resizeMode: "cover",
+                uri: "https://res.cloudinary.com/ishaks-cloudinary/image/upload/v1636629293/vpcqhfajs2j6vdepthin.jpg",
+              }}
+            />
+          </TouchableOpacity>
+        </View> */}
       </Form>
     </Screen>
   );
@@ -209,6 +229,11 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "100%",
   },
+  // selectedCandidatesContainer: {
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   backgroundColor: "red",
+  // },
   text: {
     color: colors.black,
     fontSize: 16,
