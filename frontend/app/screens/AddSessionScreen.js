@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, TextInput, View } from "react-native";
+import {
+  Image,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  View,
+} from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
@@ -9,6 +16,7 @@ import colors from "../config/colors";
 import { ErrorMessage, Form, FormField } from "../components/forms";
 import userApi from "../api/users";
 import useApi from "../hooks/useApi";
+import defaultStyles from "../config/styles";
 
 const validationSchema = Yup.object().shape({
   nameOfSession: Yup.string()
@@ -35,8 +43,6 @@ function ProfileScreen() {
     const { data: usersFromBackend } = await getAllUserApi.request();
 
     setAllUsers(usersFromBackend);
-
-    console.log("ALL USERS ARE ", allUsers);
   };
 
   const handleSubmit = async (data) => {
@@ -62,18 +68,36 @@ function ProfileScreen() {
 
   const ItemView = ({ item }) => {
     return (
-      <Text style={{ fontSize: 20 }}>
-        {item._id}
-        {". "}
-        {item.name.toUpperCase()}
-      </Text>
+      <View style={styles.userSearchView}>
+        {/* <Text style={{ fontSize: 20 }}>
+          {item._id}
+          {". "}
+          {item.name.toUpperCase()}
+        </Text> */}
+        <TouchableOpacity style={styles.makeItRound}>
+          <Image
+            source={{
+              width: 50,
+              height: 50,
+              resizeMode: "cover",
+              uri: item.profilePic,
+            }}
+          />
+        </TouchableOpacity>
+        <Text style={styles.text}>{item.name}</Text>
+      </View>
     );
   };
 
   const ItemSeparatorView = () => {
     return (
       <View
-        style={{ height: 0.5, width: "100%", backgroundColor: "#c8c8c8" }}
+        style={{
+          height: 0.5,
+          width: "100%",
+          backgroundColor: colors.superLightGray,
+          marginVertical: 20,
+        }}
       />
     );
   };
@@ -104,13 +128,15 @@ function ProfileScreen() {
           name="nameOfSession"
           placeholder="President of IT Club..."
         />
-        <TextInput
-          style={styles.textInputStyle}
-          value={search}
-          placeholder="Search something..."
-          underlineColorAndroid="transparent"
-          onChangeText={(text) => searchFilter(text)}
-        />
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.textInputStyle}
+            value={search}
+            placeholder="Search candidates..."
+            underlineColorAndroid="transparent"
+            onChangeText={(text) => searchFilter(text)}
+          />
+        </View>
         <FlatList
           data={filteredUsers}
           keyExtractor={(item, index) => index.toString()}
@@ -128,6 +154,24 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  makeItRound: {
+    alignItems: "center",
+    backgroundColor: colors.superLightGray,
+    borderRadius: 50 / 2,
+    borderColor: colors.superLightGray,
+    borderWidth: 1,
+    height: 50,
+    justifyContent: "center",
+    overflow: "hidden",
+    width: 50,
+  },
+  searchContainer: {
+    borderRadius: 10,
+    flexDirection: "row",
+    marginVertical: 5,
+    padding: 15,
+    width: "100%",
+  },
   text: {
     color: colors.black,
     fontSize: 16,
@@ -135,12 +179,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   textInputStyle: {
-    height: 40,
-    borderWidth: 1,
-    paddingLeft: 20,
-    margin: 5,
-    borderColor: "#009688",
-    backgroundColor: "white",
+    ...defaultStyles.text,
+    fontWeight: "bold",
+    height: "100%",
+    width: "100%",
+  },
+  userSearchView: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 
