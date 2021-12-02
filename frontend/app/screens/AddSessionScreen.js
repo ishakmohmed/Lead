@@ -42,10 +42,6 @@ function ProfileScreen() {
     getAllUsers();
   }, []);
 
-  useEffect(() => {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", selectedUsersAsCandidates);
-  }, [selectedUsersAsCandidates]);
-
   const getAllUsers = async () => {
     const { data: usersFromBackend } = await getAllUserApi.request();
 
@@ -163,19 +159,30 @@ function ProfileScreen() {
         />
         <Text style={styles.text}>Selected Candidates</Text>
         <View style={styles.selectedCandidatesContainer}>
-          {selectedUsersAsCandidates &&
-            selectedUsersAsCandidates.map((user) => {
-              <TouchableOpacity style={styles.makeItRound}>
-                <Image
-                  source={{
-                    width: 50,
-                    height: 50,
-                    resizeMode: "cover",
-                    uri: user.profilePic,
-                  }}
-                />
-              </TouchableOpacity>;
-            })}
+          {/* {selectedUsersAsCandidates.map((user) => {
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: user.profilePic,
+                }}
+              />
+            </TouchableOpacity>;
+          })} */}
+          {selectedUsersAsCandidates[0] && (
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: selectedUsersAsCandidates[0].profilePic,
+                }}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </Form>
     </Screen>
@@ -232,6 +239,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+    minHeight: 50,
     marginVertical: 10,
     padding: 10,
   },
