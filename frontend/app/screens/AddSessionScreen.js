@@ -42,6 +42,10 @@ function ProfileScreen() {
     getAllUsers();
   }, []);
 
+  useEffect(() => {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", selectedUsersAsCandidates);
+  }, [selectedUsersAsCandidates]);
+
   const getAllUsers = async () => {
     const { data: usersFromBackend } = await getAllUserApi.request();
 
@@ -159,26 +163,19 @@ function ProfileScreen() {
         />
         <Text style={styles.text}>Selected Candidates</Text>
         <View style={styles.selectedCandidatesContainer}>
-          <TouchableOpacity style={styles.makeItRound}>
-            <Image
-              source={{
-                width: 50,
-                height: 50,
-                resizeMode: "cover",
-                uri: "https://res.cloudinary.com/ishaks-cloudinary/image/upload/v1636629293/vpcqhfajs2j6vdepthin.jpg",
-              }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.makeItRound}>
-            <Image
-              source={{
-                width: 50,
-                height: 50,
-                resizeMode: "cover",
-                uri: "https://res.cloudinary.com/ishaks-cloudinary/image/upload/v1636629293/vpcqhfajs2j6vdepthin.jpg",
-              }}
-            />
-          </TouchableOpacity>
+          {selectedUsersAsCandidates &&
+            selectedUsersAsCandidates.map((user) => {
+              <TouchableOpacity style={styles.makeItRound}>
+                <Image
+                  source={{
+                    width: 50,
+                    height: 50,
+                    resizeMode: "cover",
+                    uri: user.profilePic,
+                  }}
+                />
+              </TouchableOpacity>;
+            })}
         </View>
       </Form>
     </Screen>
