@@ -159,18 +159,6 @@ function ProfileScreen() {
         />
         <Text style={styles.text}>Selected Candidates</Text>
         <View style={styles.selectedCandidatesContainer}>
-          {/* {selectedUsersAsCandidates.map((user) => {
-            <TouchableOpacity style={styles.makeItRound}>
-              <Image
-                source={{
-                  width: 50,
-                  height: 50,
-                  resizeMode: "cover",
-                  uri: user.profilePic,
-                }}
-              />
-            </TouchableOpacity>;
-          })} */}
           {selectedUsersAsCandidates[0] && (
             <TouchableOpacity style={styles.makeItRound}>
               <Image
