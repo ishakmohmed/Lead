@@ -183,6 +183,54 @@ function ProfileScreen() {
               />
             </TouchableOpacity>
           )}
+          {selectedUsersAsCandidates[1] && (
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: selectedUsersAsCandidates[1].profilePic,
+                }}
+              />
+            </TouchableOpacity>
+          )}
+          {selectedUsersAsCandidates[2] && (
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: selectedUsersAsCandidates[2].profilePic,
+                }}
+              />
+            </TouchableOpacity>
+          )}
+          {selectedUsersAsCandidates[3] && (
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: selectedUsersAsCandidates[3].profilePic,
+                }}
+              />
+            </TouchableOpacity>
+          )}
+          {selectedUsersAsCandidates[4] && (
+            <TouchableOpacity style={styles.makeItRound}>
+              <Image
+                source={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: "cover",
+                  uri: selectedUsersAsCandidates[4].profilePic,
+                }}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </Form>
     </Screen>
