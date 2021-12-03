@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     borderColor: colors.superLightGray,
     borderWidth: 0.5,
     flexGrow: 0,
-    height: 170,
+    height: 70,
     padding: 10,
   },
   makeItRound: {
@@ -305,10 +305,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   userSearchView: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
+    maxHeight: 50,
   },
 });
 
