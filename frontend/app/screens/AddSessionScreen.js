@@ -59,10 +59,6 @@ function ProfileScreen() {
   };
 
   const handleReset = () => {
-    console.log(
-      "data is reset, selected users are >>> >",
-      selectedUsersAsCandidates
-    );
     setSelectedUsersAsCandidates([]);
   };
 
@@ -293,7 +289,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    minHeight: 50,
+    minHeight: 70,
     marginVertical: 10,
     padding: 10,
   },
