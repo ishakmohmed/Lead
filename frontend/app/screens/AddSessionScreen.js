@@ -11,9 +11,15 @@ import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import Text from "../components/Text";
+import Button from "../components/Button";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
-import { ErrorMessage, Form, FormField } from "../components/forms";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
 import userApi from "../api/users";
 import useApi from "../hooks/useApi";
 import defaultStyles from "../config/styles";
@@ -220,6 +226,13 @@ function ProfileScreen() {
             </TouchableOpacity>
           )}
         </View>
+        <SubmitButton color="nicePink" title="Add Session" />
+        <Button
+          makeItSmall
+          title="Reset"
+          onPress={() => console.log("HELLO")}
+          color="blue"
+        />
       </Form>
     </Screen>
   );
@@ -248,7 +261,7 @@ const styles = StyleSheet.create({
     borderColor: colors.superLightGray,
     borderWidth: 0.5,
     flexGrow: 0,
-    height: 200,
+    height: 170,
     padding: 10,
   },
   makeItRound: {
