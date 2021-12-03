@@ -58,6 +58,14 @@ function ProfileScreen() {
     console.log("HELLO, WORLD!");
   };
 
+  const handleReset = () => {
+    console.log(
+      "data is reset, selected users are >>> >",
+      selectedUsersAsCandidates
+    );
+    setSelectedUsersAsCandidates([]);
+  };
+
   const searchFilter = (textThatTheUserTypesInRealTime) => {
     if (textThatTheUserTypesInRealTime) {
       const newData = allUsers.filter((item) => {
@@ -96,10 +104,12 @@ function ProfileScreen() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            setSelectedUsersAsCandidates([
-              ...selectedUsersAsCandidates,
-              { _id: item._id, profilePic: item.profilePic },
-            ]);
+            if (selectedUsersAsCandidates.length > 4 === false) {
+              setSelectedUsersAsCandidates([
+                ...selectedUsersAsCandidates,
+                { _id: item._id, profilePic: item.profilePic },
+              ]);
+            }
           }}
         >
           <Text style={styles.buttonText}>Add</Text>
@@ -227,12 +237,7 @@ function ProfileScreen() {
           )}
         </View>
         <SubmitButton color="nicePink" title="Add Session" />
-        <Button
-          makeItSmall
-          title="Reset"
-          onPress={() => console.log("HELLO")}
-          color="blue"
-        />
+        <Button makeItSmall title="Reset" onPress={handleReset} color="blue" />
       </Form>
     </Screen>
   );
