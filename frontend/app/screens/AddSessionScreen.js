@@ -101,10 +101,18 @@ function ProfileScreen() {
           style={styles.button}
           onPress={() => {
             if (selectedUsersAsCandidates.length > 4 === false) {
-              setSelectedUsersAsCandidates([
-                ...selectedUsersAsCandidates,
-                { _id: item._id, profilePic: item.profilePic },
-              ]);
+              let candidateCanBeAddedAsHeHasNeverBeenAdded = true;
+
+              for (let c of selectedUsersAsCandidates)
+                if (c._id == item._id)
+                  candidateCanBeAddedAsHeHasNeverBeenAdded = false;
+
+              if (candidateCanBeAddedAsHeHasNeverBeenAdded) {
+                setSelectedUsersAsCandidates([
+                  ...selectedUsersAsCandidates,
+                  { _id: item._id, profilePic: item.profilePic },
+                ]);
+              }
             }
           }}
         >
