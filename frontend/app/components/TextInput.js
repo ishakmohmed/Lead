@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   textInput: {
     ...defaultStyles.text,
     height: "100%",
-    width: "100%",
+    width: "90%",
   },
 });
 
