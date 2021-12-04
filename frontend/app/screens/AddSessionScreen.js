@@ -33,8 +33,6 @@ const validationSchema = Yup.object().shape({
 });
 
 function ProfileScreen() {
-  const [hasErrorForNameOfSession, setHasErrorForNameOfSession] =
-    useState(false);
   const [hasErrorForCandidates, setHasErrorForCandidates] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -55,10 +53,12 @@ function ProfileScreen() {
   };
 
   const handleSubmit = async (data) => {
-    console.log("HELLO, WORLD!");
+    if (selectedUsersAsCandidates.length < 2)
+      return setHasErrorForCandidates(true);
   };
 
   const handleReset = () => {
+    setHasErrorForCandidates(false);
     setSelectedUsersAsCandidates([]);
   };
 
@@ -145,14 +145,6 @@ function ProfileScreen() {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <ErrorMessage
-          error="Name of session must be of length 5 to 20."
-          visible={hasErrorForNameOfSession}
-        />
-        <ErrorMessage
-          error="You must select 2 to 5 candidates only."
-          visible={hasErrorForCandidates}
-        />
         <Text style={styles.text}>Name of Session</Text>
         <FormField
           autoCapitalize="none"
@@ -240,6 +232,10 @@ function ProfileScreen() {
             </TouchableOpacity>
           )}
         </View>
+        <ErrorMessage
+          error="You must select 2 to 5 candidates only."
+          visible={hasErrorForCandidates}
+        />
         <SubmitButton color="nicePink" title="Add Session" />
         <Button makeItSmall title="Reset" onPress={handleReset} color="blue" />
       </Form>
