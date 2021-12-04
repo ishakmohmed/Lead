@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Image,
   FlatList,
@@ -20,7 +20,9 @@ import {
   FormField,
   SubmitButton,
 } from "../components/forms";
+import AuthContext from "../auth/context";
 import userApi from "../api/users";
+import votingApi from "../api/voting";
 import useApi from "../hooks/useApi";
 import defaultStyles from "../config/styles";
 
@@ -41,6 +43,8 @@ function ProfileScreen() {
   );
   const [search, setSearch] = useState("");
   const getAllUserApi = useApi(userApi.getAllUsers);
+  const addVotingSessionApi = useApi(votingApi.addVotingSession);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getAllUsers();
@@ -52,11 +56,15 @@ function ProfileScreen() {
     setAllUsers(usersFromBackend);
   };
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async ({ nameOfSession }) => {
     if (selectedUsersAsCandidates.length < 2)
       return setHasErrorForCandidates(true);
 
-    
+    addVotingSessionApi.request({
+      creatorId: user.id,
+      candidates: selectedUsersAsCandidates,
+      nameOfSession,
+    });
   };
 
   const handleReset = () => {
