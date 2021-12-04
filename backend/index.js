@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/error.js";
 import userRoutes from "./routes/user.js";
+import votingRoutes from "./routes/voting.js";
 
 dotenv.config();
 connectDB();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 app.use("/api/users", userRoutes);
+app.use("/api/votes", votingRoutes);
 app.use(notFound);
 app.use(errorHandler);
 

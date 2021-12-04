@@ -55,6 +55,8 @@ function ProfileScreen() {
   const handleSubmit = async (data) => {
     if (selectedUsersAsCandidates.length < 2)
       return setHasErrorForCandidates(true);
+
+    
   };
 
   const handleReset = () => {
