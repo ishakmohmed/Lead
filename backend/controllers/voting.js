@@ -1,42 +1,46 @@
 import asyncHandler from "express-async-handler";
+import mongoose from "mongoose";
+
 import VotingSession from "../models/votingSession.js";
+import User from "../models/user.js";
 
 const addVotingSession = asyncHandler(async (req, res) => {
   const { candidates, nameOfSession, creatorId } = req.body;
+  const creatorIdAsMongooseId = mongoose.Types.ObjectId(creatorId);
 
-  console.log("ROUTE HANDLER HAS BEEN REACHED!!!!!!!!!!!!!!!!!!!!");
-  console.log("1- candidates > ", candidates);
-  console.log("2- nameOfSession > ", nameOfSession);
-  console.log("3- creatorId > ", creatorId);
+  for (let i = 0; i < candidates.length; i++) {
+    const existingUserInDatabase = await User.find({ _id: candidates[i]._id });
 
-  // const user = await User.findOne({ email });
+    if (!existingUserInDatabase) {
+      res.status(400);
+      throw new Error("Invalid new voting session data.");
+    }
 
-  // if (user) {
-  //   res.status(400);
-  //   throw new Error("User already exists.");
-  // }
+    candidates[i] = {
+      ...candidates[i],
+      _id: existingUserInDatabase._id,
+      profilePic: existingUserInDatabase.profilePic,
+      name: existingUserInDatabase.name,
+    };
+  }
 
-  // const createdUser = await User.create({
-  //   name,
-  //   email,
-  //   bio,
-  //   profilePic,
-  //   password,
-  // });
+  const createdVotingSession = await VotingSession.create({
+    candidates,
+    nameOfSession,
+    creatorId: creatorIdAsMongooseId,
+  });
 
-  // if (createdUser) {
-  //   res.status(201).json({
-  //     _id: createdUser._id,
-  //     name: createdUser.name,
-  //     email: createdUser.email,
-  //     bio: createdUser.bio,
-  //     profilePic,
-  //     token: generateToken(createdUser._id),
-  //   });
-  // } else {
-  //   res.status(400);
-  //   throw new Error("Invalid user data.");
-  // }
+  if (createdVotingSession) {
+    res.status(201).json({
+      _id: createdVotingSession._id,
+      nameOfSession: createdVotingSession.nameOfSession,
+      creatorId: createdVotingSession.creatorId,
+      candidates: createdVotingSession.candidates,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid new voting session data.");
+  }
 });
 
 export { addVotingSession };

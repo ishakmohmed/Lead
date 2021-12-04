@@ -14,7 +14,6 @@ const votingSessionSchema = mongoose.Schema({
   candidates: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "User",
     },
   ],
@@ -24,7 +23,6 @@ const votingSessionSchema = mongoose.Schema({
   },
   creatorId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     ref: "User",
   },
   dateCreated: {
@@ -41,12 +39,11 @@ const votingSessionSchema = mongoose.Schema({
   },
   winner: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     ref: "User",
   },
   dateEnded: {
     type: Date,
-    default: Date.now(),
+    default: null,
   },
 });
 
