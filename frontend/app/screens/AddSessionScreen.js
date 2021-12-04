@@ -65,6 +65,8 @@ function ProfileScreen() {
       candidates: selectedUsersAsCandidates,
       nameOfSession,
     });
+
+    handleReset();
   };
 
   const handleReset = () => {
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     flexGrow: 0,
     height: 70,
+    marginBottom: 20,
     padding: 10,
   },
   makeItRound: {

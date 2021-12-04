@@ -13,11 +13,9 @@ const votingSessionSchema = mongoose.Schema({
   },
   candidates: [
     {
-      // type: mongoose.Schema.Types.ObjectId,
       _id: mongoose.Schema.Types.ObjectId,
       profilePic: String,
       name: String,
-      // ref: "User",
     },
   ],
   isGoingOn: {

@@ -22,8 +22,6 @@ const addVotingSession = asyncHandler(async (req, res) => {
     };
   }
 
-  console.log("now the candidates are ", candidates);
-
   const createdVotingSession = await VotingSession.create({
     candidates,
     nameOfSession,
