@@ -18,9 +18,7 @@ const addVotingSession = asyncHandler(async (req, res) => {
 
     candidates[i] = {
       ...candidates[i],
-      _id: existingUserInDatabase._id,
-      profilePic: existingUserInDatabase.profilePic,
-      name: existingUserInDatabase.name,
+      name: existingUserInDatabase[0].name,
     };
   }
 
