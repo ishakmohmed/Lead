@@ -5,6 +5,7 @@ import TabBar from "../components/TabBar";
 import LogoutScreen from "../screens/LogoutScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import AddSessionScreen from "../screens/AddSessionScreen";
+import votingStackNavigator from "./votingStackNavigator";
 import routes from "./routes";
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ const AppNavigator = () => {
           headerShown: false,
         }}
         name={routes.VOTE}
-        component={LogoutScreen}
+        component={votingStackNavigator}
         initialParams={{ icon: "vote-yea" }}
       />
       <Tab.Screen
