@@ -3,4 +3,8 @@ import client from "./client";
 const addVotingSession = (votingSessionData) =>
   client.post("/api/votes", votingSessionData);
 
-export default { addVotingSession };
+const getAllVotingSessions = () => {
+  client.get("/api/votes");
+};
+
+export default { addVotingSession, getAllVotingSessions };
