@@ -10,37 +10,6 @@ import votingApi from "../api/voting";
 import colors from "../config/colors";
 
 function VotingSessionsScreen({ navigation }) {
-  const [allVotingSessions, setAllVotingSessions] = useState([]);
-  const getAllVotingSessionsApi = useApi(votingApi.getAllVotingSessions);
-
-  useEffect(() => {
-    getAllVotingSessions();
-  }, []);
-
-  const getAllVotingSessions = async () => {
-    try {
-      const { data: allVotingSessionsFromBackend } =
-        await getAllVotingSessionsApi.request();
-
-      setAllVotingSessions(allVotingSessionsFromBackend);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const ItemSeparatorView = () => {
-    return (
-      <View
-        style={{
-          height: 0.5,
-          width: "100%",
-          backgroundColor: colors.superLightGray,
-          marginVertical: 20,
-        }}
-      />
-    );
-  };
-
   return (
     <Screen>
       <View style={styles.container}>
@@ -50,15 +19,6 @@ function VotingSessionsScreen({ navigation }) {
           onPress={() => navigation.navigate("ActualVotingScreen")}
           color="nicePink"
         />
-        {allVotingSessions && (
-          <FlatList
-            data={allVotingSessions}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={ItemSeparatorView}
-            renderItem={EachVotingSession}
-            style={styles.flatList}
-          />
-        )}
       </View>
     </Screen>
   );

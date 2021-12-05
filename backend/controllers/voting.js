@@ -4,6 +4,17 @@ import mongoose from "mongoose";
 import VotingSession from "../models/votingSession.js";
 import User from "../models/user.js";
 
+const getAllVotingSessions = asyncHandler(async (req, res) => {
+  const allVotingSessions = await VotingSession.find({ isGoingOn: true });
+
+  if (!allVotingSessions) {
+    res.status(404);
+    throw new Error("No voting session found.");
+  }
+
+  return res.json({ allVotingSessions }).status(200);
+});
+
 const addVotingSession = asyncHandler(async (req, res) => {
   const { candidates, nameOfSession, creatorId } = req.body;
   const creatorIdAsMongooseId = mongoose.Types.ObjectId(creatorId);
@@ -41,4 +52,4 @@ const addVotingSession = asyncHandler(async (req, res) => {
   }
 });
 
-export { addVotingSession };
+export { addVotingSession, getAllVotingSessions };
