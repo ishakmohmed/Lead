@@ -27,11 +27,10 @@ const StackNavigator = () => (
         // headerShown: false,
       }}
     />
-
     <Stack.Screen
-      name="TweetDetails"
+      name="ActualVotingScreen"
       component={ActualVotingScreen}
-      options={({ route }) => ({ title: route.params.id })}
+      // options={({ route }) => ({ title: route.params.id })}
     />
   </Stack.Navigator>
 );

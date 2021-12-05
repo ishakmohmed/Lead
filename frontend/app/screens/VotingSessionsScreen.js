@@ -12,7 +12,7 @@ function VotingSessionsScreen({ navigation }) {
         <HeadingText>Voting Sessions</HeadingText>
         <Button
           title="Click Me"
-          onPress={() => navigation.navigate("VotingSessionsScreen")}
+          onPress={() => navigation.navigate("ActualVotingScreen")}
           color="nicePink"
         />
       </View>
