@@ -5,9 +5,28 @@ import { Ionicons } from "@expo/vector-icons";
 import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
+import votingApi from "../api/voting";
+import useApi from "../hooks/useApi";
 
 function ActualVotingScreen({ navigation, route }) {
   console.log(route.params.votingSessionId);
+  const [votingSession, setVotingSession] = useState({});
+
+  const getCurrentVotingSessionApi = useApi(
+    votingApi.getJustOneVotingSession(route.params.sessionId)
+  );
+
+  useEffect(() => {
+    getCurrentVotingSession();
+  }, []);
+
+  const getCurrentVotingSession = async () => {
+    const { data } = await getCurrentVotingSessionApi.request();
+
+    setVotingSession(data);
+
+    console.log("now the data is ", data);
+  };
 
   return (
     <Screen>
