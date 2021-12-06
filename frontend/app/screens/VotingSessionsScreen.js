@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import Button from "../components/Button";
+import ActivityIndicatorForScrollableView from "../components/ActivityIndicatorForScrollableView";
 import HeadingText from "../components/HeadingText";
 import EachVotingSession from "../components/EachVotingSession";
 import useApi from "../hooks/useApi";
@@ -10,23 +12,37 @@ import votingApi from "../api/voting";
 import colors from "../config/colors";
 
 function VotingSessionsScreen({ navigation }) {
+  // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
+
   const getAllVotingSessionsApi = useApi(votingApi.getAllVotingSessions);
   const [allVotingSessions, setAllVotingSessions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAllVotingSessions();
   }, []);
 
   const getAllVotingSessions = async () => {
+    setLoading(true);
+
     const { data } = await getAllVotingSessionsApi.request();
 
     setAllVotingSessions(data.allVotingSessions);
+    setLoading(false);
+  };
+
+  const handlePressReloadButton = async () => {
+    await getAllVotingSessions();
   };
 
   return (
     <Screen>
       <View style={styles.container}>
         <HeadingText>Voting Sessions</HeadingText>
+        <TouchableOpacity onPress={handlePressReloadButton} style={styles.icon}>
+          <Ionicons name="reload-circle" size={50} color={colors.light} />
+        </TouchableOpacity>
+        <ActivityIndicatorForScrollableView visible={loading} />
         <ScrollView style={styles.scrollView}>
           {/* <Button
           title="Click Me"
@@ -64,6 +80,9 @@ const styles = StyleSheet.create({
     height: 70,
     marginBottom: 20,
     padding: 10,
+  },
+  icon: {
+    alignSelf: "center",
   },
   scrollView: {
     marginBottom: 125,
