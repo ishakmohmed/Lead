@@ -13,7 +13,7 @@ function EachVotingSession({
   votingSessionId,
   onPressEndSessionButton,
 }) {
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   let strDate = dateCreated;
   strDate = strDate.substring(0, 10);
 

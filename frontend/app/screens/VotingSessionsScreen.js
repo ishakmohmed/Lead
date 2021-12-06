@@ -3,7 +3,6 @@ import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
-import Button from "../components/Button";
 import ActivityIndicatorForScrollableView from "../components/ActivityIndicatorForScrollableView";
 import HeadingText from "../components/HeadingText";
 import EachVotingSession from "../components/EachVotingSession";
@@ -37,6 +36,7 @@ function VotingSessionsScreen({ navigation }) {
 
   const handlePressEndSessionButton = async (votingSessionId) => {
     await votingApi.endAVotingSession(votingSessionId);
+    await getAllVotingSessions();
   };
 
   return (
