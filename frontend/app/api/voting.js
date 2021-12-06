@@ -8,7 +8,7 @@ const getAllVotingSessions = () => {
 };
 
 const getJustOneVotingSession = (votingSessionId) => {
-  return client.get(`/api/votes/:votingSessionId`);
+  return client.get(`/api/votes/${votingSessionId}`);
 };
 
 const endAVotingSession = (votingSessionId) => {
