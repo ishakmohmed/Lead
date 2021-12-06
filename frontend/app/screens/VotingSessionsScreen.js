@@ -27,11 +27,11 @@ function VotingSessionsScreen({ navigation }) {
     <Screen>
       <View style={styles.container}>
         <HeadingText>Voting Sessions</HeadingText>
-        <Button
+        {/* <Button
           title="Click Me"
           onPress={() => navigation.navigate("ActualVotingScreen")}
           color="nicePink"
-        />
+        /> */}
         {allVotingSessions &&
           allVotingSessions.map((vs, index) => {
             return (
