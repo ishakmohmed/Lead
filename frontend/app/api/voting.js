@@ -8,6 +8,8 @@ const getAllVotingSessions = () => {
 };
 
 const getJustOneVotingSession = (votingSessionId) => {
+  console.log("REACHED!");
+
   return client.get(`/api/votes/${votingSessionId}`);
 };
 

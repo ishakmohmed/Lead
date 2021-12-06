@@ -10,23 +10,10 @@ import useApi from "../hooks/useApi";
 
 function ActualVotingScreen({ navigation, route }) {
   console.log(route.params.votingSessionId);
-  const [votingSession, setVotingSession] = useState({});
-
-  const getCurrentVotingSessionApi = useApi(
-    votingApi.getJustOneVotingSession(route.params.sessionId)
-  );
 
   useEffect(() => {
-    getCurrentVotingSession();
+    votingApi.getJustOneVotingSession(route.params.votingSessionId);
   }, []);
-
-  const getCurrentVotingSession = async () => {
-    const { data } = await getCurrentVotingSessionApi.request();
-
-    setVotingSession(data);
-
-    console.log("now the data is ", data);
-  };
 
   return (
     <Screen>
