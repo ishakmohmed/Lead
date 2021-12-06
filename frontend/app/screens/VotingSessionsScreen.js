@@ -39,6 +39,10 @@ function VotingSessionsScreen({ navigation }) {
     await getAllVotingSessions();
   };
 
+  const handlePressVoteButton = (votingSessionId) => {
+    navigation.navigate("ActualVotingScreen", { votingSessionId });
+  };
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -48,11 +52,6 @@ function VotingSessionsScreen({ navigation }) {
         </TouchableOpacity>
         <ActivityIndicatorForScrollableView visible={loading} />
         <ScrollView style={styles.scrollView}>
-          {/* <Button
-          title="Click Me"
-          onPress={() => navigation.navigate("ActualVotingScreen")}
-          color="nicePink"
-        /> */}
           {allVotingSessions &&
             allVotingSessions.map((vs, index) => {
               return (
@@ -64,6 +63,7 @@ function VotingSessionsScreen({ navigation }) {
                   key={index}
                   votingSessionId={vs._id}
                   onPressEndSessionButton={handlePressEndSessionButton}
+                  onPressVoteButton={handlePressVoteButton}
                 />
               );
             })}

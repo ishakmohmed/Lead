@@ -12,6 +12,7 @@ function EachVotingSession({
   creatorId,
   votingSessionId,
   onPressEndSessionButton,
+  onPressVoteButton,
 }) {
   const { user } = useContext(AuthContext);
   let strDate = dateCreated;
@@ -38,7 +39,10 @@ function EachVotingSession({
         })}
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onPressVoteButton(votingSessionId)}
+        >
           <Text style={styles.buttonText}>Vote</Text>
         </TouchableOpacity>
         {creatorId == user.id && (

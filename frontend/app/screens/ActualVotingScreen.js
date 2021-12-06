@@ -5,7 +5,9 @@ import Screen from "../components/Screen";
 import Button from "../components/Button";
 import HeadingText from "../components/HeadingText";
 
-function ActualVotingScreen({ navigation }) {
+function ActualVotingScreen({ navigation, route }) {
+  console.log(route.params.votingSessionId);
+
   return (
     <Screen>
       <View style={styles.container}>
