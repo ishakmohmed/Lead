@@ -33,8 +33,15 @@ function VotingSessionsScreen({ navigation }) {
           color="nicePink"
         />
         {allVotingSessions &&
-          allVotingSessions.map((vs) => {
-            return <EachVotingSession />;
+          allVotingSessions.map((vs, index) => {
+            return (
+              <EachVotingSession
+                nameOfSession={vs.nameOfSession}
+                candidates={vs.candidates}
+                dateCreated={vs.dateCreated}
+                key={index}
+              />
+            );
           })}
       </View>
     </Screen>
