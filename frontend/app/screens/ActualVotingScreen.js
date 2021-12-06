@@ -1,9 +1,10 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
-import Button from "../components/Button";
 import HeadingText from "../components/HeadingText";
+import colors from "../config/colors";
 
 function ActualVotingScreen({ navigation, route }) {
   console.log(route.params.votingSessionId);
@@ -12,17 +13,31 @@ function ActualVotingScreen({ navigation, route }) {
     <Screen>
       <View style={styles.container}>
         <HeadingText>Vote Now</HeadingText>
-        <Button
-          title="Click Me"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate("VotingSessionsScreen")}
-          color="nicePink"
-        />
+        >
+          <Ionicons name="arrow-back" size={25} color={colors.light} />
+        </TouchableOpacity>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: colors.black,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    width: 70,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   container: {
     padding: 10,
     paddingLeft: 20,

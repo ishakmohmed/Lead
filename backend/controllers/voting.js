@@ -45,6 +45,7 @@ const addVotingSession = asyncHandler(async (req, res) => {
       nameOfSession: createdVotingSession.nameOfSession,
       creatorId: createdVotingSession.creatorId,
       candidates: createdVotingSession.candidates,
+      voteCountForThisCandidate: 0,
     });
   } else {
     res.status(400);
@@ -59,6 +60,7 @@ const endAVotingSession = asyncHandler(async (req, res) => {
     },
     {
       isGoingOn: false,
+      dateEnded: Date.now(),
     }
   );
 });

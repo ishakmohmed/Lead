@@ -16,6 +16,13 @@ const votingSessionSchema = mongoose.Schema({
       _id: mongoose.Schema.Types.ObjectId,
       profilePic: String,
       name: String,
+      voteCountForThisCandidate: Number,
+    },
+  ],
+  whoVotedForThisSession: [
+    {
+      _id: mongoose.Schema.Types.ObjectId,
+      name: String,
     },
   ],
   isGoingOn: {
