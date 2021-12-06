@@ -6,14 +6,22 @@ import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
 import votingApi from "../api/voting";
-import useApi from "../hooks/useApi";
 
 function ActualVotingScreen({ navigation, route }) {
   console.log(route.params.votingSessionId);
+  const [votingSession, setVotingSession] = useState({});
 
   useEffect(() => {
-    votingApi.getJustOneVotingSession(route.params.votingSessionId);
+    getCurrentVotingSession();
   }, []);
+
+  const getCurrentVotingSession = async () => {
+    const data = await votingApi.getJustOneVotingSession(
+      route.params.votingSessionId
+    );
+
+    setVotingSession(data.data.votingSession);
+  };
 
   return (
     <Screen>
