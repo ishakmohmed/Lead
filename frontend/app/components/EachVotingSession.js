@@ -10,6 +10,8 @@ function EachVotingSession({
   candidates,
   dateCreated,
   creatorId,
+  votingSessionId,
+  onPressEndSessionButton,
 }) {
   const { user, setUser } = useContext(AuthContext);
   let strDate = dateCreated;
@@ -40,11 +42,19 @@ function EachVotingSession({
           <Text style={styles.buttonText}>Vote</Text>
         </TouchableOpacity>
         {creatorId == user.id && (
-          <TouchableOpacity style={styles.endSessionButton}>
+          <TouchableOpacity
+            style={styles.endSessionButton}
+            onPress={() => onPressEndSessionButton(votingSessionId)}
+          >
             <Text style={styles.buttonText}>End Session</Text>
           </TouchableOpacity>
         )}
       </View>
+      {creatorId == user.id && (
+        <Text style={styles.noteForSessionCreator}>
+          only creator (you) can see the end button
+        </Text>
+      )}
     </View>
   );
 }
@@ -112,6 +122,11 @@ const styles = StyleSheet.create({
   nameOfSessionText: {
     alignSelf: "center",
     fontWeight: "bold",
+  },
+  noteForSessionCreator: {
+    alignSelf: "center",
+    fontSize: 12,
+    color: colors.medium,
   },
 });
 

@@ -52,4 +52,15 @@ const addVotingSession = asyncHandler(async (req, res) => {
   }
 });
 
-export { addVotingSession, getAllVotingSessions };
+const endAVotingSession = asyncHandler(async (req, res) => {
+  await VotingSession.updateOne(
+    {
+      _id: mongoose.Types.ObjectId(req.params.id),
+    },
+    {
+      isGoingOn: false,
+    }
+  );
+});
+
+export { addVotingSession, getAllVotingSessions, endAVotingSession };

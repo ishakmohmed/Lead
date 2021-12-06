@@ -35,6 +35,10 @@ function VotingSessionsScreen({ navigation }) {
     await getAllVotingSessions();
   };
 
+  const handlePressEndSessionButton = async (votingSessionId) => {
+    await votingApi.endAVotingSession(votingSessionId);
+  };
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -58,6 +62,8 @@ function VotingSessionsScreen({ navigation }) {
                   dateCreated={vs.dateCreated}
                   creatorId={vs.creatorId}
                   key={index}
+                  votingSessionId={vs._id}
+                  onPressEndSessionButton={handlePressEndSessionButton}
                 />
               );
             })}
