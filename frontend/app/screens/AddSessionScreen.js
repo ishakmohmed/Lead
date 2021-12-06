@@ -43,6 +43,9 @@ function ProfileScreen() {
   );
   const [search, setSearch] = useState("");
   const getAllUserApi = useApi(userApi.getAllUsers);
+
+  // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
+
   const addVotingSessionApi = useApi(votingApi.addVotingSession);
   const { user } = useContext(AuthContext);
 

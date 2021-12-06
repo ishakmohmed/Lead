@@ -10,6 +10,19 @@ import votingApi from "../api/voting";
 import colors from "../config/colors";
 
 function VotingSessionsScreen({ navigation }) {
+  const getAllVotingSessionsApi = useApi(votingApi.getAllVotingSessions);
+  const [allVotingSessions, setAllVotingSessions] = useState([]);
+
+  useEffect(() => {
+    getAllVotingSessions();
+  }, []);
+
+  const getAllVotingSessions = async () => {
+    const { data } = await getAllVotingSessionsApi.request();
+
+    setAllVotingSessions(data.allVotingSessions);
+  };
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -19,6 +32,10 @@ function VotingSessionsScreen({ navigation }) {
           onPress={() => navigation.navigate("ActualVotingScreen")}
           color="nicePink"
         />
+        {allVotingSessions &&
+          allVotingSessions.map((vs) => {
+            return <EachVotingSession />;
+          })}
       </View>
     </Screen>
   );

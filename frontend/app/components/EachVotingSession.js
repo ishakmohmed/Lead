@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
+import colors from "../config/colors";
 import HeadingText from "./HeadingText";
 
-function EachVotingSession() {
+function EachVotingSession({ nameOfSession, candidates, dateCreated }) {
   return (
     <View style={styles.container}>
       <HeadingText>EACH SESSION</HeadingText>
@@ -12,7 +13,9 @@ function EachVotingSession() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+
+  },
 });
 
 export default EachVotingSession;
