@@ -33,6 +33,10 @@ function ActualVotingScreen({ navigation, route }) {
         >
           <Ionicons name="arrow-back" size={25} color={colors.light} />
         </TouchableOpacity>
+        {votingSession.candidates &&
+          votingSession.candidates.map((c, index) => {
+            return <HeadingText key={index}>{c.name}</HeadingText>;
+          })}
       </View>
     </Screen>
   );
