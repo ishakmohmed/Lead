@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 
 import Screen from "../components/Screen";
 import Button from "../components/Button";
@@ -27,22 +27,24 @@ function VotingSessionsScreen({ navigation }) {
     <Screen>
       <View style={styles.container}>
         <HeadingText>Voting Sessions</HeadingText>
-        {/* <Button
+        <ScrollView style={styles.scrollView}>
+          {/* <Button
           title="Click Me"
           onPress={() => navigation.navigate("ActualVotingScreen")}
           color="nicePink"
         /> */}
-        {allVotingSessions &&
-          allVotingSessions.map((vs, index) => {
-            return (
-              <EachVotingSession
-                nameOfSession={vs.nameOfSession}
-                candidates={vs.candidates}
-                dateCreated={vs.dateCreated}
-                key={index}
-              />
-            );
-          })}
+          {allVotingSessions &&
+            allVotingSessions.map((vs, index) => {
+              return (
+                <EachVotingSession
+                  nameOfSession={vs.nameOfSession}
+                  candidates={vs.candidates}
+                  dateCreated={vs.dateCreated}
+                  key={index}
+                />
+              );
+            })}
+        </ScrollView>
       </View>
     </Screen>
   );
@@ -53,6 +55,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 0,
   },
   flatList: {
     borderColor: colors.superLightGray,
@@ -61,6 +64,9 @@ const styles = StyleSheet.create({
     height: 70,
     marginBottom: 20,
     padding: 10,
+  },
+  scrollView: {
+    marginBottom: 125,
   },
 });
 
