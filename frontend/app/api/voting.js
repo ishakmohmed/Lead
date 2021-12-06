@@ -7,8 +7,17 @@ const getAllVotingSessions = () => {
   return client.get("/api/votes");
 };
 
+const getJustOneVotingSession = (votingSessionId) => {
+  return client.get(`/api/votes/:votingSessionId`);
+};
+
 const endAVotingSession = (votingSessionId) => {
   client.post(`/api/votes/${votingSessionId}`);
 };
 
-export default { addVotingSession, endAVotingSession, getAllVotingSessions };
+export default {
+  addVotingSession,
+  endAVotingSession,
+  getAllVotingSessions,
+  getJustOneVotingSession,
+};

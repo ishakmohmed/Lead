@@ -15,6 +15,17 @@ const getAllVotingSessions = asyncHandler(async (req, res) => {
   return res.json({ allVotingSessions }).status(200);
 });
 
+const getJustOneVotingSession = asyncHandler(async (req, res) => {
+  const votingSession = await VotingSession.findOne({ _id: req.params.id });
+
+  if (!votingSession) {
+    res.status(404);
+    throw new Error("Voting session is not found.");
+  }
+  
+  return res.json({ votingSession }).status(200);
+});
+
 const addVotingSession = asyncHandler(async (req, res) => {
   const { candidates, nameOfSession, creatorId } = req.body;
   const creatorIdAsMongooseId = mongoose.Types.ObjectId(creatorId);
@@ -30,6 +41,7 @@ const addVotingSession = asyncHandler(async (req, res) => {
     candidates[i] = {
       ...candidates[i],
       name: existingUserInDatabase[0].name,
+      voteCountForThisCandidate: 0,
     };
   }
 
@@ -45,7 +57,6 @@ const addVotingSession = asyncHandler(async (req, res) => {
       nameOfSession: createdVotingSession.nameOfSession,
       creatorId: createdVotingSession.creatorId,
       candidates: createdVotingSession.candidates,
-      voteCountForThisCandidate: 0,
     });
   } else {
     res.status(400);
@@ -65,4 +76,9 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   );
 });
 
-export { addVotingSession, getAllVotingSessions, endAVotingSession };
+export {
+  addVotingSession,
+  getAllVotingSessions,
+  endAVotingSession,
+  getJustOneVotingSession,
+};
