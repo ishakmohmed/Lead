@@ -56,6 +56,7 @@ function VotingSessionsScreen({ navigation }) {
                   nameOfSession={vs.nameOfSession}
                   candidates={vs.candidates}
                   dateCreated={vs.dateCreated}
+                  creatorId={vs.creatorId}
                   key={index}
                 />
               );
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   scrollView: {
-    marginBottom: 125,
+    marginBottom: 200,
   },
 });
 

@@ -1,15 +1,17 @@
-import React from "react";
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useContext } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import colors from "../config/colors";
 import Text from "./Text";
+import AuthContext from "../auth/context";
 
-function EachVotingSession({ nameOfSession, candidates, dateCreated }) {
+function EachVotingSession({
+  nameOfSession,
+  candidates,
+  dateCreated,
+  creatorId,
+}) {
+  const { user, setUser } = useContext(AuthContext);
   let strDate = dateCreated;
   strDate = strDate.substring(0, 10);
 
@@ -37,9 +39,11 @@ function EachVotingSession({ nameOfSession, candidates, dateCreated }) {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Vote</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.endSessionButton}>
-          <Text style={styles.buttonText}>End Session</Text>
-        </TouchableOpacity>
+        {creatorId == user.id && (
+          <TouchableOpacity style={styles.endSessionButton}>
+            <Text style={styles.buttonText}>End Session</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
