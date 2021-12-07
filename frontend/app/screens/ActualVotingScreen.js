@@ -50,19 +50,17 @@ function ActualVotingScreen({ navigation, route }) {
   };
 
   const handlePressYesButton = async (index) => {
-    console.log("voted for >>> ", votingSession.candidates[index]._id);
-    console.log("i am >>> ", user.id);
-    console.log("voting session id is >>> ", votingSession._id);
-
     const personWhoReceivedVote = votingSession.candidates[index]._id;
     const personWhoCastedVote = user.id;
     const votingSessionId = votingSession._id;
-    
+
     await votingApi.updateVotingSessionWithNewVote(
       personWhoReceivedVote,
       personWhoCastedVote,
       votingSessionId
     );
+
+    navigation.navigate("VotingSessionsScreen");
   };
 
   return (

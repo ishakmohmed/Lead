@@ -78,7 +78,35 @@ const endAVotingSession = asyncHandler(async (req, res) => {
 });
 
 const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
-  console.log("bro, req.body is >>>", req.body);
+  const { personWhoCastedVote, personWhoReceivedVote, votingSessionId } =
+    req.body;
+  const votingSession = await VotingSession.find({
+    _id: mongoose.Types.ObjectId(votingSessionId),
+  });
+  let arrayThatWillBeModified = votingSession[0].candidates;
+
+  console.log("************", arrayThatWillBeModified[0]);
+
+  for (let i = 0; i < arrayThatWillBeModified.length; i++) {
+    if (arrayThatWillBeModified[i]._id.toString() === personWhoReceivedVote)
+      arrayThatWillBeModified[i].voteCountForThisCandidate =
+        voteCountForThisCandidate + 1;
+  }
+
+  console.log("NOW THE ARRAY IS >>> ", arrayThatWillBeModified);
+
+  await VotingSession.updateOne(
+    {
+      _id: mongoose.Types.ObjectId(votingSessionId),
+    },
+    {
+      whoVotedForThisSession: [
+        ...whoVotedForThisSession,
+        mongoose.Types.ObjectId(personWhoCastedVote),
+      ],
+      candidates: arrayThatWillBeModified,
+    }
+  );
 });
 
 export {
