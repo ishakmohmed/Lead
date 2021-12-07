@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     borderColor: colors.superLightGray,
-    borderWidth: 0.5,
+    borderWidth: 1,
     flexGrow: 0,
     height: 70,
     marginBottom: 20,

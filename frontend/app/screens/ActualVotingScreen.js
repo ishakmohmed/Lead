@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image, TouchableOpacity, View, StyleSheet } from "react-native";
+import {
+  Image,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
@@ -36,33 +42,41 @@ function ActualVotingScreen({ navigation, route }) {
         >
           <Ionicons name="arrow-back" size={25} color={colors.light} />
         </TouchableOpacity>
-        {votingSession.candidates &&
-          votingSession.candidates.map((c, index) => {
-            return (
-              <View key={index}>
-                <View style={styles.candidateView}>
-                  <TouchableOpacity key={index} style={styles.makeItRound}>
-                    <Image
-                      source={{
-                        width: 50,
-                        height: 50,
-                        resizeMode: "cover",
-                        uri: c.profilePic,
-                      }}
-                    />
-                  </TouchableOpacity>
-                  <Text style={styles.candidateName}>{c.name}</Text>
-                  <Text style={styles.bio}>{c.bio}</Text>
+        <ScrollView style={styles.kindaLikeFlatList}>
+          {votingSession.candidates &&
+            votingSession.candidates.map((c, index) => {
+              return (
+                <View key={index} style={styles.candidateContainer}>
+                  <View style={styles.candidateView}>
+                    <TouchableOpacity key={index} style={styles.makeItRound}>
+                      <Image
+                        source={{
+                          width: 50,
+                          height: 50,
+                          resizeMode: "cover",
+                          uri: c.profilePic,
+                        }}
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.candidateName}>{c.name}</Text>
+                  </View>
+                  <Text style={styles.bio}>"{c.bio}"</Text>
                 </View>
-              </View>
-            );
-          })}
+              );
+            })}
+        </ScrollView>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  bio: {
+    fontSize: 16,
+    color: colors.medium,
+    textAlign: "center",
+    fontStyle: "italic",
+  },
   button: {
     alignItems: "center",
     backgroundColor: colors.black,
@@ -75,6 +89,15 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
     fontWeight: "bold",
+  },
+  candidateContainer: {
+    borderColor: colors.superLightGray,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginVertical: 10,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   candidateName: {
     fontWeight: "bold",
@@ -90,6 +113,9 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  kindaLikeFlatList: {
+    marginBottom: 150,
   },
   makeItRound: {
     alignItems: "center",
