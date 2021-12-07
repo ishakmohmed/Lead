@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  Alert,
   Image,
   TouchableOpacity,
   View,
@@ -36,6 +37,12 @@ function ActualVotingScreen({ navigation, route }) {
 
   const handlePressSelectButton = (selectedCandidateIndex) => {
     setArrayIndexOfSelectedCandidate(selectedCandidateIndex);
+
+    Alert.alert(
+      "Vote Confirmation",
+      `Cast vote for ${votingSession.candidates[arrayIndexOfSelectedCandidate].name}? Remember, you cannot vote again for this session.`,
+      [{ text: "Cancel" }, { text: "Yes" }]
+    );
   };
 
   const handlePressCastVoteButton = () => {
