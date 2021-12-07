@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Image,
   TouchableOpacity,
@@ -14,11 +14,13 @@ import Text from "../components/Text";
 import colors from "../config/colors";
 import Button from "../components/Button";
 import votingApi from "../api/voting";
+import AuthContext from "../auth/context";
 
 function ActualVotingScreen({ navigation, route }) {
   const [votingSession, setVotingSession] = useState({});
   const [arrayIndexOfSelectedCandidate, setArrayIndexOfSelectedCandidate] =
-    useState(0);
+    useState(null);
+  const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     getCurrentVotingSession();
@@ -34,6 +36,10 @@ function ActualVotingScreen({ navigation, route }) {
 
   const handlePressSelectButton = (selectedCandidateIndex) => {
     setArrayIndexOfSelectedCandidate(selectedCandidateIndex);
+  };
+
+  const handlePressCastVoteButton = () => {
+    console.log(votingSession.candidates[arrayIndexOfSelectedCandidate]._id);
   };
 
   return (
@@ -165,7 +171,7 @@ const styles = StyleSheet.create({
   },
   kindaLikeFlatList: {
     marginTop: 20,
-    marginBottom: 150,
+    marginBottom: 180,
   },
   makeItRound: {
     alignItems: "center",
