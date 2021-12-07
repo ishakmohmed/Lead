@@ -19,7 +19,7 @@ import AuthContext from "../auth/context";
 function ActualVotingScreen({ navigation, route }) {
   const [votingSession, setVotingSession] = useState({});
   const [arrayIndexOfSelectedCandidate, setArrayIndexOfSelectedCandidate] =
-    useState(null);
+    useState(0);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function ActualVotingScreen({ navigation, route }) {
     setArrayIndexOfSelectedCandidate(selectedCandidateIndex);
     Alert.alert(
       "Confirmation",
-      `Cast vote for ${votingSession.candidates[arrayIndexOfSelectedCandidate].name}? Remember, you cannot vote again for this session.`,
+      `Cast vote for ${votingSession.candidates[selectedCandidateIndex].name}? Remember, you cannot vote again for this session.`,
       [
         { text: "Yes", onPress: () => handlePressYesButton() },
         { text: "Cancel" },
