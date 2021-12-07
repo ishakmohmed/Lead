@@ -22,7 +22,7 @@ const getJustOneVotingSession = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Voting session is not found.");
   }
-  
+
   return res.json({ votingSession }).status(200);
 });
 
@@ -40,6 +40,7 @@ const addVotingSession = asyncHandler(async (req, res) => {
 
     candidates[i] = {
       ...candidates[i],
+      bio: existingUserInDatabase[0].bio,
       name: existingUserInDatabase[0].name,
       voteCountForThisCandidate: 0,
     };

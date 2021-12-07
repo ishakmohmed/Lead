@@ -16,6 +16,7 @@ const votingSessionSchema = mongoose.Schema({
       _id: mongoose.Schema.Types.ObjectId,
       profilePic: String,
       name: String,
+      bio: String,
       voteCountForThisCandidate: Number,
     },
   ],
