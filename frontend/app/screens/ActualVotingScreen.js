@@ -12,6 +12,7 @@ import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import Text from "../components/Text";
 import colors from "../config/colors";
+import Button from "../components/Button";
 import votingApi from "../api/voting";
 
 function ActualVotingScreen({ navigation, route }) {
@@ -28,8 +29,6 @@ function ActualVotingScreen({ navigation, route }) {
     );
 
     setVotingSession(data.data.votingSession);
-
-    console.log("man >>> ", votingSession);
   };
 
   return (
@@ -61,6 +60,16 @@ function ActualVotingScreen({ navigation, route }) {
                     <Text style={styles.candidateName}>{c.name}</Text>
                   </View>
                   <Text style={styles.bio}>"{c.bio}"</Text>
+                  <TouchableOpacity style={styles.selectButton}>
+                    <Text
+                      style={[
+                        styles.selectButtonText,
+                        { color: colors.medium },
+                      ]}
+                    >
+                      Select
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               );
             })}
@@ -83,7 +92,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 40,
     justifyContent: "center",
+    marginTop: 10,
     width: 70,
+  },
+  selectButton: {
+    alignItems: "center",
+    backgroundColor: colors.light,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 30,
+    marginLeft: "auto",
+    width: 140,
+  },
+  selectButtonText: {
+    color: colors.medium,
+    fontSize: 16,
+    fontWeight: "bold",
   },
   buttonText: {
     color: colors.white,
@@ -115,6 +140,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   kindaLikeFlatList: {
+    marginTop: 20,
     marginBottom: 150,
   },
   makeItRound: {
