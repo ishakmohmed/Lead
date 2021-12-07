@@ -77,9 +77,14 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   );
 });
 
+const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
+  console.log("bro, req.body is >>>", req.body);
+});
+
 export {
   addVotingSession,
   getAllVotingSessions,
   endAVotingSession,
   getJustOneVotingSession,
+  updateVotingSessionWithNewVote,
 };
