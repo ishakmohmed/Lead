@@ -16,7 +16,6 @@ import Button from "../components/Button";
 import votingApi from "../api/voting";
 
 function ActualVotingScreen({ navigation, route }) {
-  console.log(route.params.votingSessionId);
   const [votingSession, setVotingSession] = useState({});
 
   useEffect(() => {
@@ -41,7 +40,10 @@ function ActualVotingScreen({ navigation, route }) {
         >
           <Ionicons name="arrow-back" size={25} color={colors.light} />
         </TouchableOpacity>
-        <ScrollView style={styles.kindaLikeFlatList}>
+        <ScrollView
+          style={styles.kindaLikeFlatList}
+          showsVerticalScrollIndicator={false}
+        >
           {votingSession.candidates &&
             votingSession.candidates.map((c, index) => {
               return (

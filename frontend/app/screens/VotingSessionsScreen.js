@@ -26,7 +26,7 @@ function VotingSessionsScreen({ navigation }) {
 
     const { data } = await getAllVotingSessionsApi.request();
 
-    setAllVotingSessions(data.allVotingSessions);
+    setAllVotingSessions(data.allVotingSessions.reverse());
     setLoading(false);
   };
 
@@ -51,7 +51,10 @@ function VotingSessionsScreen({ navigation }) {
           <Ionicons name="reload-circle" size={50} color={colors.light} />
         </TouchableOpacity>
         <ActivityIndicatorForScrollableView visible={loading} />
-        <ScrollView style={styles.scrollView}>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
           {allVotingSessions &&
             allVotingSessions.map((vs, index) => {
               return (
