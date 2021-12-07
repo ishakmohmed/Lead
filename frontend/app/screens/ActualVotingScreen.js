@@ -13,7 +13,6 @@ import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import Text from "../components/Text";
 import colors from "../config/colors";
-import Button from "../components/Button";
 import votingApi from "../api/voting";
 import AuthContext from "../auth/context";
 
@@ -21,7 +20,7 @@ function ActualVotingScreen({ navigation, route }) {
   const [votingSession, setVotingSession] = useState({});
   const [arrayIndexOfSelectedCandidate, setArrayIndexOfSelectedCandidate] =
     useState(null);
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getCurrentVotingSession();
@@ -37,16 +36,20 @@ function ActualVotingScreen({ navigation, route }) {
 
   const handlePressSelectButton = (selectedCandidateIndex) => {
     setArrayIndexOfSelectedCandidate(selectedCandidateIndex);
-
     Alert.alert(
-      "Vote Confirmation",
+      "Confirmation",
       `Cast vote for ${votingSession.candidates[arrayIndexOfSelectedCandidate].name}? Remember, you cannot vote again for this session.`,
-      [{ text: "Cancel" }, { text: "Yes" }]
+      [
+        { text: "Yes", onPress: () => handlePressYesButton() },
+        { text: "Cancel" },
+      ]
     );
   };
 
-  const handlePressCastVoteButton = () => {
+  const handlePressYesButton = () => {
     console.log(votingSession.candidates[arrayIndexOfSelectedCandidate]._id);
+    console.log(user.id);
+    console.log(votingSession._id);
   };
 
   return (
