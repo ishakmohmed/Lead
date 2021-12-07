@@ -40,16 +40,19 @@ function ActualVotingScreen({ navigation, route }) {
       "Confirmation",
       `Cast vote for ${votingSession.candidates[selectedCandidateIndex].name}? Remember, you cannot vote again for this session.`,
       [
-        { text: "Yes", onPress: () => handlePressYesButton() },
+        {
+          text: "Yes",
+          onPress: () => handlePressYesButton(selectedCandidateIndex),
+        },
         { text: "Cancel" },
       ]
     );
   };
 
-  const handlePressYesButton = () => {
-    console.log(votingSession.candidates[arrayIndexOfSelectedCandidate]._id);
-    console.log(user.id);
-    console.log(votingSession._id);
+  const handlePressYesButton = (index) => {
+    console.log("voted for >>> ", votingSession.candidates[index]._id);
+    console.log("i am >>> ", user.id);
+    console.log("voting session id is >>> ", votingSession._id);
   };
 
   return (
