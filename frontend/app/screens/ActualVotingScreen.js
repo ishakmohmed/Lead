@@ -17,6 +17,8 @@ import votingApi from "../api/voting";
 
 function ActualVotingScreen({ navigation, route }) {
   const [votingSession, setVotingSession] = useState({});
+  const [arrayIndexOfSelectedCandidate, setArrayIndexOfSelectedCandidate] =
+    useState(0);
 
   useEffect(() => {
     getCurrentVotingSession();
@@ -28,6 +30,10 @@ function ActualVotingScreen({ navigation, route }) {
     );
 
     setVotingSession(data.data.votingSession);
+  };
+
+  const handlePressSelectButton = (selectedCandidateIndex) => {
+    setArrayIndexOfSelectedCandidate(selectedCandidateIndex);
   };
 
   return (
@@ -62,11 +68,27 @@ function ActualVotingScreen({ navigation, route }) {
                     <Text style={styles.candidateName}>{c.name}</Text>
                   </View>
                   <Text style={styles.bio}>"{c.bio}"</Text>
-                  <TouchableOpacity style={styles.selectButton}>
+                  <TouchableOpacity
+                    style={[
+                      styles.selectButton,
+                      {
+                        backgroundColor:
+                          index == arrayIndexOfSelectedCandidate
+                            ? colors.nicePink
+                            : colors.light,
+                      },
+                    ]}
+                    onPress={() => handlePressSelectButton(index)}
+                  >
                     <Text
                       style={[
                         styles.selectButtonText,
-                        { color: colors.medium },
+                        {
+                          color:
+                            index == arrayIndexOfSelectedCandidate
+                              ? colors.white
+                              : colors.medium,
+                        },
                       ]}
                     >
                       Select
