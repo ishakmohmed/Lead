@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   lockedAnimationContainer: {
     width: "50%",
     alignSelf: "center",
-    marginBottom: 500,
+    marginBottom: 600,
   },
   makeItRound: {
     alignItems: "center",
