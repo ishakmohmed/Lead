@@ -24,6 +24,7 @@ function ActualVotingScreen({ navigation, route }) {
 
   useEffect(() => {
     getCurrentVotingSession();
+    console.log(typeof user.id);
   }, []);
 
   const getCurrentVotingSession = async () => {
@@ -32,6 +33,7 @@ function ActualVotingScreen({ navigation, route }) {
     );
 
     setVotingSession(data.data.votingSession);
+    console.log("bro, ", data.data.votingSession.whoVotedForThisSession);
   };
 
   const handlePressSelectButton = (selectedCandidateIndex) => {
@@ -66,65 +68,78 @@ function ActualVotingScreen({ navigation, route }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <HeadingText>Vote Now</HeadingText>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("VotingSessionsScreen")}
-        >
-          <Ionicons name="arrow-back" size={25} color={colors.light} />
-        </TouchableOpacity>
-        <ScrollView
-          style={styles.kindaLikeFlatList}
-          showsVerticalScrollIndicator={false}
-        >
-          {votingSession.candidates &&
-            votingSession.candidates.map((c, index) => {
-              return (
-                <View key={index} style={styles.candidateContainer}>
-                  <View style={styles.candidateView}>
-                    <TouchableOpacity key={index} style={styles.makeItRound}>
-                      <Image
-                        source={{
-                          width: 50,
-                          height: 50,
-                          resizeMode: "cover",
-                          uri: c.profilePic,
-                        }}
-                      />
-                    </TouchableOpacity>
-                    <Text style={styles.candidateName}>{c.name}</Text>
-                  </View>
-                  <Text style={styles.bio}>"{c.bio}"</Text>
-                  <TouchableOpacity
-                    style={[
-                      styles.selectButton,
-                      {
-                        backgroundColor:
-                          index == arrayIndexOfSelectedCandidate
-                            ? colors.nicePink
-                            : colors.light,
-                      },
-                    ]}
-                    onPress={() => handlePressSelectButton(index)}
-                  >
-                    <Text
-                      style={[
-                        styles.selectButtonText,
-                        {
-                          color:
-                            index == arrayIndexOfSelectedCandidate
-                              ? colors.white
-                              : colors.medium,
-                        },
-                      ]}
-                    >
-                      Select
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-        </ScrollView>
+        {!(
+          votingSession &&
+          votingSession.whoVotedForThisSession &&
+          votingSession.whoVotedForThisSession.includes(user.id)
+        ) ? (
+          <>
+            <HeadingText>Vote Now</HeadingText>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("VotingSessionsScreen")}
+            >
+              <Ionicons name="arrow-back" size={25} color={colors.light} />
+            </TouchableOpacity>
+            <ScrollView
+              style={styles.kindaLikeFlatList}
+              showsVerticalScrollIndicator={false}
+            >
+              {votingSession.candidates &&
+                votingSession.candidates.map((c, index) => {
+                  return (
+                    <View key={index} style={styles.candidateContainer}>
+                      <View style={styles.candidateView}>
+                        <TouchableOpacity
+                          key={index}
+                          style={styles.makeItRound}
+                        >
+                          <Image
+                            source={{
+                              width: 50,
+                              height: 50,
+                              resizeMode: "cover",
+                              uri: c.profilePic,
+                            }}
+                          />
+                        </TouchableOpacity>
+                        <Text style={styles.candidateName}>{c.name}</Text>
+                      </View>
+                      <Text style={styles.bio}>"{c.bio}"</Text>
+                      <TouchableOpacity
+                        style={[
+                          styles.selectButton,
+                          {
+                            backgroundColor:
+                              index == arrayIndexOfSelectedCandidate
+                                ? colors.nicePink
+                                : colors.light,
+                          },
+                        ]}
+                        onPress={() => handlePressSelectButton(index)}
+                      >
+                        <Text
+                          style={[
+                            styles.selectButtonText,
+                            {
+                              color:
+                                index == arrayIndexOfSelectedCandidate
+                                  ? colors.white
+                                  : colors.medium,
+                            },
+                          ]}
+                        >
+                          Select
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  );
+                })}
+            </ScrollView>
+          </>
+        ) : (
+          <HeadingText>LOL</HeadingText>
+        )}
       </View>
     </Screen>
   );
