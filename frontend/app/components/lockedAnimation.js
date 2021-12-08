@@ -10,7 +10,7 @@ function WorkingTogetherAnimation() {
       <LottieView
         autoPlay
         loop
-        source={require("../assets/animations/workingTogetherAnimation.json")}
+        source={require("../assets/animations/lockedAnimation.json")}
       />
     </View>
   );
@@ -19,7 +19,7 @@ function WorkingTogetherAnimation() {
 const styles = StyleSheet.create({
   overlay: {
     backgroundColor: colors.white,
-    height: "30%",
+    height: "80%",
     opacity: 1,
     width: "100%",
     zIndex: 1,

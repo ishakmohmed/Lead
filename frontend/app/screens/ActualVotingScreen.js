@@ -15,6 +15,7 @@ import Text from "../components/Text";
 import colors from "../config/colors";
 import votingApi from "../api/voting";
 import AuthContext from "../auth/context";
+import LockedAnimation from "../components/lockedAnimation";
 
 function ActualVotingScreen({ navigation, route }) {
   const [votingSession, setVotingSession] = useState({});
@@ -138,7 +139,10 @@ function ActualVotingScreen({ navigation, route }) {
             </ScrollView>
           </>
         ) : (
-          <HeadingText>LOL</HeadingText>
+          <>
+            <HeadingText>LOL</HeadingText>
+            <LockedAnimation />
+          </>
         )}
       </View>
     </Screen>
