@@ -21,10 +21,11 @@ const votingSessionSchema = mongoose.Schema({
     },
   ],
   whoVotedForThisSession: [
-    {
-      _id: mongoose.Schema.Types.ObjectId,
-      name: String,
-    },
+    // {
+    //   _id: mongoose.Schema.Types.ObjectId,
+    //   name: String,
+    // },
+    String,
   ],
   isGoingOn: {
     type: Boolean,

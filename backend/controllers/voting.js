@@ -84,38 +84,30 @@ const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
     _id: mongoose.Types.ObjectId(votingSessionId),
   });
 
-  // console.log(votingSession[0].candidates);
-
   let arrayThatWillBeModified = votingSession[0].candidates.toObject();
 
-  // console.log("now0", arrayThatWillBeModified[0]);
-
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {
-    // console.log(typeof arrayThatWillBeModified[i]._id.toString());
-    // console.log(typeof personWhoReceivedVote);
-
-    if (arrayThatWillBeModified[i]._id.toString() == personWhoReceivedVote) {
+    if (arrayThatWillBeModified[i]._id.toString() == personWhoReceivedVote)
       arrayThatWillBeModified[i].voteCountForThisCandidate =
         arrayThatWillBeModified[i].voteCountForThisCandidate + 1;
-    }
 
-    console.log("yo", arrayThatWillBeModified[i]);
+    arrayThatWillBeModified[i]._id = mongoose.Types.ObjectId(
+      arrayThatWillBeModified[i]._id
+    );
   }
 
-  // console.log("now1", arrayThatWillBeModified);
+  const modifiedArray = arrayThatWillBeModified;
+  let result = await VotingSession.findOne({
+    _id: mongoose.Types.ObjectId(votingSessionId),
+  });
 
-  // await VotingSession.updateOne(
-  //   {
-  //     _id: mongoose.Types.ObjectId(votingSessionId),
-  //   },
-  //   {
-  //     whoVotedForThisSession: [
-  //       ...whoVotedForThisSession,
-  //       mongoose.Types.ObjectId(personWhoCastedVote),
-  //     ],
-  //     candidates: arrayThatWillBeModified,
-  //   }
-  // );
+  result.candidates = modifiedArray;
+  result.whoVotedForThisSession = [
+    ...result.whoVotedForThisSession,
+    personWhoCastedVote,
+  ];
+
+  await result.save();
 });
 
 export {
