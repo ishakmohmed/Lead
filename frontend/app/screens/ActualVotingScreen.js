@@ -141,6 +141,16 @@ function ActualVotingScreen({ navigation, route }) {
         ) : (
           <>
             <HeadingText>Screen Locked</HeadingText>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("VotingSessionsScreen")}
+            >
+              <Ionicons name="arrow-back" size={25} color={colors.light} />
+            </TouchableOpacity>
+            <Text style={styles.warningText}>
+              You already voted for this session. You may cast your vote in
+              other sessions.
+            </Text>
             <View style={styles.lockedAnimationContainer}>
               <LockedAnimation />
             </View>
@@ -196,9 +206,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  kindaLikeFlatList: {
+    marginTop: 20,
+    marginBottom: 180,
+  },
   lockedAnimationContainer: {
     width: "50%",
     alignSelf: "center",
+    marginBottom: 500,
   },
   makeItRound: {
     alignItems: "center",
@@ -226,9 +241,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  kindaLikeFlatList: {
-    marginTop: 20,
-    marginBottom: 180,
+  warningText: {
+    backgroundColor: colors.nicePink,
+    borderRadius: 10,
+    color: "white",
+    fontWeight: "bold",
+    padding: 20,
+    marginTop: 50,
   },
 });
 
