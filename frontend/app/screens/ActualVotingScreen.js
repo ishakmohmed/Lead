@@ -25,7 +25,6 @@ function ActualVotingScreen({ navigation, route }) {
 
   useEffect(() => {
     getCurrentVotingSession();
-    console.log(typeof user.id);
   }, []);
 
   const getCurrentVotingSession = async () => {
@@ -34,7 +33,6 @@ function ActualVotingScreen({ navigation, route }) {
     );
 
     setVotingSession(data.data.votingSession);
-    console.log("bro, ", data.data.votingSession.whoVotedForThisSession);
   };
 
   const handlePressSelectButton = (selectedCandidateIndex) => {
@@ -140,7 +138,7 @@ function ActualVotingScreen({ navigation, route }) {
           </>
         ) : (
           <>
-            <HeadingText>Screen Locked</HeadingText>
+            <HeadingText>Session Blocked</HeadingText>
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate("VotingSessionsScreen")}
