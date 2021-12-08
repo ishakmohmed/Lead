@@ -140,8 +140,10 @@ function ActualVotingScreen({ navigation, route }) {
           </>
         ) : (
           <>
-            <HeadingText>LOL</HeadingText>
-            <LockedAnimation />
+            <HeadingText>Screen Locked</HeadingText>
+            <View style={styles.lockedAnimationContainer}>
+              <LockedAnimation />
+            </View>
           </>
         )}
       </View>
@@ -164,21 +166,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
     width: 70,
-  },
-  selectButton: {
-    alignItems: "center",
-    backgroundColor: colors.light,
-    borderRadius: 5,
-    height: 40,
-    justifyContent: "center",
-    marginTop: 30,
-    marginLeft: "auto",
-    width: 140,
-  },
-  selectButtonText: {
-    color: colors.medium,
-    fontSize: 16,
-    fontWeight: "bold",
   },
   buttonText: {
     color: colors.white,
@@ -209,9 +196,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  kindaLikeFlatList: {
-    marginTop: 20,
-    marginBottom: 180,
+  lockedAnimationContainer: {
+    width: "50%",
+    alignSelf: "center",
   },
   makeItRound: {
     alignItems: "center",
@@ -223,6 +210,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     overflow: "hidden",
     width: 50,
+  },
+  selectButton: {
+    alignItems: "center",
+    backgroundColor: colors.light,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 30,
+    marginLeft: "auto",
+    width: 140,
+  },
+  selectButtonText: {
+    color: colors.medium,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  kindaLikeFlatList: {
+    marginTop: 20,
+    marginBottom: 180,
   },
 });
 
