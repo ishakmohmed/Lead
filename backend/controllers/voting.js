@@ -84,6 +84,18 @@ const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
     _id: mongoose.Types.ObjectId(votingSessionId),
   });
 
+  if (votingSession)
+    await VotingSession.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(votingSessionId),
+      },
+      {
+        $inc: {
+          votersCount: 1,
+        },
+      }
+    );
+
   let arrayThatWillBeModified = votingSession[0].candidates.toObject();
 
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {

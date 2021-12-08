@@ -20,13 +20,7 @@ const votingSessionSchema = mongoose.Schema({
       voteCountForThisCandidate: Number,
     },
   ],
-  whoVotedForThisSession: [
-    // {
-    //   _id: mongoose.Schema.Types.ObjectId,
-    //   name: String,
-    // },
-    String,
-  ],
+  whoVotedForThisSession: [String],
   isGoingOn: {
     type: Boolean,
     default: true,
