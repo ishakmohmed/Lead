@@ -88,21 +88,21 @@ const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
 
   let arrayThatWillBeModified = votingSession[0].candidates.toObject();
 
-  console.log("now0", arrayThatWillBeModified);
+  // console.log("now0", arrayThatWillBeModified[0]);
 
-  for (let i = 0; i < arrayThatWillBeModified[i].length; i++) {
-    if (
-      arrayThatWillBeModified[i]._id.toString() ==
-      personWhoReceivedVote.toString()
-    ) {
+  for (let i = 0; i < arrayThatWillBeModified.length; i++) {
+    // console.log(typeof arrayThatWillBeModified[i]._id.toString());
+    // console.log(typeof personWhoReceivedVote);
+
+    if (arrayThatWillBeModified[i]._id.toString() == personWhoReceivedVote) {
       arrayThatWillBeModified[i].voteCountForThisCandidate =
-        voteCountForThisCandidate + 1;
-
-      console.log("HELL YEAH");
+        arrayThatWillBeModified[i].voteCountForThisCandidate + 1;
     }
+
+    console.log("yo", arrayThatWillBeModified[i]);
   }
 
-  console.log("now1", arrayThatWillBeModified);
+  // console.log("now1", arrayThatWillBeModified);
 
   // await VotingSession.updateOne(
   //   {
