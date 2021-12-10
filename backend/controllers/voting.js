@@ -66,6 +66,12 @@ const addVotingSession = asyncHandler(async (req, res) => {
 });
 
 const endAVotingSession = asyncHandler(async (req, res) => {
+  const votingSession = await VotingSession.find({
+    _id: mongoose.Types.ObjectId(req.params.id),
+  });
+
+  let arrayThatWillBeModified = votingSession.candidates.toObject();
+
   await VotingSession.updateOne(
     {
       _id: mongoose.Types.ObjectId(req.params.id),
