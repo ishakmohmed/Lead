@@ -41,11 +41,9 @@ const votingSessionSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  winner: {
-    _id: mongoose.Schema.Types.ObjectId,
-    profilePic: String,
-    name: String,
-    bio: String,
+  winnerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   dateEnded: {
     type: Date,

@@ -70,7 +70,18 @@ const endAVotingSession = asyncHandler(async (req, res) => {
     _id: mongoose.Types.ObjectId(req.params.id),
   });
 
-  let arrayThatWillBeModified = votingSession.candidates.toObject();
+  let arrayThatWillBeModified = votingSession[0].candidates.toObject();
+  let winnerWithAllHisOrHerDetails = arrayThatWillBeModified[0];
+
+  for (let i = 0; i < arrayThatWillBeModified.length; i++) {
+    if (
+      arrayThatWillBeModified[i].voteCountForThisCandidate >
+      winnerWithAllHisOrHerDetails.voteCountForThisCandidate
+    )
+      winnerWithAllHisOrHerDetails = arrayThatWillBeModified[i];
+  }
+
+  console.log("yo", winnerWithAllHisOrHerDetails);
 
   await VotingSession.updateOne(
     {
@@ -79,6 +90,7 @@ const endAVotingSession = asyncHandler(async (req, res) => {
     {
       isGoingOn: false,
       dateEnded: Date.now(),
+      winnerId: mongoose.Types.ObjectId(winnerWithAllHisOrHerDetails._id),
     }
   );
 });
