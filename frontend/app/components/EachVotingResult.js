@@ -8,20 +8,16 @@ import AuthContext from "../auth/context";
 function EachVotingResult({
   nameOfSession,
   candidates,
-  dateCreated,
-  creatorId,
-  votingSessionId,
-  onPressEndSessionButton,
-  onPressVoteButton,
+  dateEnded,
 }) {
   const { user } = useContext(AuthContext);
-  let strDate = dateCreated;
+  let strDate = dateEnded;
   strDate = strDate.substring(0, 10);
 
   return (
     <View style={styles.container}>
       <Text style={styles.nameOfSessionText}>{nameOfSession}</Text>
-      <Text style={styles.dateCreatedText}>session created at {strDate}</Text>
+      <Text style={styles.dateCreatedText}>session ended at {strDate}</Text>
       <View style={styles.candidatesContainer}>
         {candidates.map((c, index) => {
           return (
@@ -38,27 +34,6 @@ function EachVotingResult({
           );
         })}
       </View>
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => onPressVoteButton(votingSessionId)}
-        >
-          <Text style={styles.buttonText}>Vote</Text>
-        </TouchableOpacity>
-        {creatorId == user.id && (
-          <TouchableOpacity
-            style={styles.endSessionButton}
-            onPress={() => onPressEndSessionButton(votingSessionId)}
-          >
-            <Text style={styles.buttonText}>End Session</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-      {creatorId == user.id && (
-        <Text style={styles.noteForSessionCreator}>
-          only creator (you) can see the end button
-        </Text>
-      )}
     </View>
   );
 }

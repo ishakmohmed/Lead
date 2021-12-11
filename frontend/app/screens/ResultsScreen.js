@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Screen from "../components/Screen";
 import ActivityIndicatorForScrollableView from "../components/ActivityIndicatorForScrollableView";
 import HeadingText from "../components/HeadingText";
-import EachVotingSession from "../components/EachVotingSession";
+import EachVotingResult from "../components/EachVotingResult";
 import useApi from "../hooks/useApi";
 import votingApi from "../api/voting";
 import colors from "../config/colors";
@@ -28,7 +28,7 @@ function ResultsScreen({ navigation }) {
 
     const { data } = await getAllEndedVotingSessionsApi.request();
 
-    if (data) setAllVotingSessions(data.allVotingSessions.reverse());
+    setAllVotingSessions(data.allVotingSessions.reverse());
 
     setLoading(false);
   };
@@ -52,15 +52,13 @@ function ResultsScreen({ navigation }) {
           {allVotingSessions &&
             allVotingSessions.map((vs, index) => {
               return (
-                <EachVotingSession
+                <EachVotingResult
                   nameOfSession={vs.nameOfSession}
                   candidates={vs.candidates}
-                  dateCreated={vs.dateCreated}
+                  dateEnded={vs.dateEnded}
                   creatorId={vs.creatorId}
                   key={index}
                   votingSessionId={vs._id}
-                  onPressEndSessionButton={handlePressEndSessionButton}
-                  onPressVoteButton={handlePressVoteButton}
                 />
               );
             })}
