@@ -81,8 +81,6 @@ const endAVotingSession = asyncHandler(async (req, res) => {
       winnerWithAllHisOrHerDetails = arrayThatWillBeModified[i];
   }
 
-  console.log("yo", winnerWithAllHisOrHerDetails);
-
   await VotingSession.updateOne(
     {
       _id: mongoose.Types.ObjectId(req.params.id),
