@@ -15,17 +15,6 @@ const getAllOngoingVotingSessions = asyncHandler(async (req, res) => {
   return res.json({ allVotingSessions }).status(200);
 });
 
-const getAllEndedVotingSessions = asyncHandler(async (req, res) => {
-  const allVotingSessions = await VotingSession.find({ isGoingOn: false });
-
-  if (!allVotingSessions) {
-    res.status(404);
-    throw new Error("No voting session found.");
-  }
-
-  return res.json({ allVotingSessions }).status(200);
-});
-
 const getJustOneVotingSession = asyncHandler(async (req, res) => {
   const votingSession = await VotingSession.findOne({ _id: req.params.id });
 
@@ -158,7 +147,6 @@ const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
 export {
   addVotingSession,
   getAllOngoingVotingSessions,
-  getAllEndedVotingSessions,
   endAVotingSession,
   getJustOneVotingSession,
   updateVotingSessionWithNewVote,
