@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/error.js";
 import userRoutes from "./routes/user.js";
+import resultsRoutes from "./routes/results.js";
 import votingRoutes from "./routes/voting.js";
 
 dotenv.config();
