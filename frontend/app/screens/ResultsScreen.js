@@ -29,7 +29,7 @@ function ResultsScreen({ navigation }) {
     const { data } = await getAllEndedVotingSessionsApi.request();
 
     if (data) setAllVotingSessions(data.allVotingSessions.reverse());
-    
+
     setLoading(false);
   };
 
@@ -37,19 +37,10 @@ function ResultsScreen({ navigation }) {
     await getAllEndedVotingSessions();
   };
 
-  const handlePressEndSessionButton = async (votingSessionId) => {
-    await votingApi.endAVotingSession(votingSessionId);
-    await getAllEndedVotingSessions();
-  };
-
-  const handlePressVoteButton = (votingSessionId) => {
-    navigation.navigate("ActualVotingScreen", { votingSessionId });
-  };
-
   return (
     <Screen>
       <View style={styles.container}>
-        <HeadingText>Voting Sessions</HeadingText>
+        <HeadingText>Past Results</HeadingText>
         <TouchableOpacity onPress={handlePressReloadButton} style={styles.icon}>
           <Ionicons name="reload-circle" size={50} color={colors.light} />
         </TouchableOpacity>
