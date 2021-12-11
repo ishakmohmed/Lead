@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 app.use("/api/users", userRoutes);
+app.use("/api/votes/results", resultsRoutes);
 app.use("/api/votes", votingRoutes);
 app.use(notFound);
 app.use(errorHandler);

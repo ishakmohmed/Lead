@@ -10,33 +10,36 @@ import useApi from "../hooks/useApi";
 import votingApi from "../api/voting";
 import colors from "../config/colors";
 
-function VotingSessionsScreen({ navigation }) {
+function ResultsScreen({ navigation }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
-  const getAllOngoingVotingSessionsApi = useApi(votingApi.getAllOngoingVotingSessions);
+  const getAllEndedVotingSessionsApi = useApi(
+    votingApi.getAllEndedVotingSessions
+  );
   const [allVotingSessions, setAllVotingSessions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllVotingSessions();
+    getAllEndedVotingSessions();
   }, []);
 
-  const getAllVotingSessions = async () => {
+  const getAllEndedVotingSessions = async () => {
     setLoading(true);
 
-    const { data } = await getAllOngoingVotingSessionsApi.request();
+    const { data } = await getAllEndedVotingSessionsApi.request();
 
-    setAllVotingSessions(data.allVotingSessions.reverse());
+    if (data) setAllVotingSessions(data.allVotingSessions.reverse());
+    
     setLoading(false);
   };
 
   const handlePressReloadButton = async () => {
-    await getAllVotingSessions();
+    await getAllEndedVotingSessions();
   };
 
   const handlePressEndSessionButton = async (votingSessionId) => {
     await votingApi.endAVotingSession(votingSessionId);
-    await getAllVotingSessions();
+    await getAllEndedVotingSessions();
   };
 
   const handlePressVoteButton = (votingSessionId) => {
@@ -99,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VotingSessionsScreen;
+export default ResultsScreen;

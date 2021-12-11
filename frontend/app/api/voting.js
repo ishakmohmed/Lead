@@ -3,8 +3,12 @@ import client from "./client";
 const addVotingSession = (votingSessionData) =>
   client.post("/api/votes", votingSessionData);
 
-const getAllVotingSessions = () => {
+const getAllOngoingVotingSessions = () => {
   return client.get("/api/votes");
+};
+
+const getAllEndedVotingSessions = () => {
+  return client.get("/api/votes/results");
 };
 
 const getJustOneVotingSession = (votingSessionId) => {
@@ -30,7 +34,8 @@ const updateVotingSessionWithNewVote = (
 export default {
   addVotingSession,
   endAVotingSession,
-  getAllVotingSessions,
+  getAllOngoingVotingSessions,
+  getAllEndedVotingSessions,
   getJustOneVotingSession,
   updateVotingSessionWithNewVote,
 };

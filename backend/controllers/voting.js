@@ -4,8 +4,19 @@ import mongoose from "mongoose";
 import VotingSession from "../models/votingSession.js";
 import User from "../models/user.js";
 
-const getAllVotingSessions = asyncHandler(async (req, res) => {
+const getAllOngoingVotingSessions = asyncHandler(async (req, res) => {
   const allVotingSessions = await VotingSession.find({ isGoingOn: true });
+
+  if (!allVotingSessions) {
+    res.status(404);
+    throw new Error("No voting session found.");
+  }
+
+  return res.json({ allVotingSessions }).status(200);
+});
+
+const getAllEndedVotingSessions = asyncHandler(async (req, res) => {
+  const allVotingSessions = await VotingSession.find({ isGoingOn: false });
 
   if (!allVotingSessions) {
     res.status(404);
@@ -74,17 +85,17 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   let highestVotersCountForThisSession =
     arrayThatWillBeModified[0].voteCountForThisCandidate;
   let winnerWithAllHisOrHerDetails = arrayThatWillBeModified[0];
-  
+
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {
     if (
       arrayThatWillBeModified[i].voteCountForThisCandidate >
       winnerWithAllHisOrHerDetails.voteCountForThisCandidate
     ) {
-      highestVotersCountForThisSession = arrayThatWillBeModified[i].voteCountForThisCandidate;
+      highestVotersCountForThisSession =
+        arrayThatWillBeModified[i].voteCountForThisCandidate;
       winnerWithAllHisOrHerDetails = arrayThatWillBeModified[i];
     }
   }
-
 
   await VotingSession.updateOne(
     {
@@ -146,7 +157,8 @@ const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
 
 export {
   addVotingSession,
-  getAllVotingSessions,
+  getAllOngoingVotingSessions,
+  getAllEndedVotingSessions,
   endAVotingSession,
   getJustOneVotingSession,
   updateVotingSessionWithNewVote,
