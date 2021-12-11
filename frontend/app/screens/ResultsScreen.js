@@ -40,7 +40,7 @@ function ResultsScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <HeadingText>Past Results</HeadingText>
+        <HeadingText>Final Result</HeadingText>
         <TouchableOpacity onPress={handlePressReloadButton} style={styles.icon}>
           <Ionicons name="reload-circle" size={50} color={colors.light} />
         </TouchableOpacity>
@@ -56,6 +56,7 @@ function ResultsScreen({ navigation }) {
                   nameOfSession={vs.nameOfSession}
                   candidates={vs.candidates}
                   dateEnded={vs.dateEnded}
+                  winnerId={vs.winnerId}
                   creatorId={vs.creatorId}
                   key={index}
                   votingSessionId={vs._id}
