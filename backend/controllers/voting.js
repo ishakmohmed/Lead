@@ -71,15 +71,20 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   });
 
   let arrayThatWillBeModified = votingSession[0].candidates.toObject();
+  let highestVotersCountForThisSession =
+    arrayThatWillBeModified[0].voteCountForThisCandidate;
   let winnerWithAllHisOrHerDetails = arrayThatWillBeModified[0];
-
+  
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {
     if (
       arrayThatWillBeModified[i].voteCountForThisCandidate >
       winnerWithAllHisOrHerDetails.voteCountForThisCandidate
-    )
+    ) {
+      highestVotersCountForThisSession = arrayThatWillBeModified[i].voteCountForThisCandidate;
       winnerWithAllHisOrHerDetails = arrayThatWillBeModified[i];
+    }
   }
+
 
   await VotingSession.updateOne(
     {
@@ -89,6 +94,7 @@ const endAVotingSession = asyncHandler(async (req, res) => {
       isGoingOn: false,
       dateEnded: Date.now(),
       winnerId: mongoose.Types.ObjectId(winnerWithAllHisOrHerDetails._id),
+      highestVotersCount: highestVotersCountForThisSession,
     }
   );
 });
