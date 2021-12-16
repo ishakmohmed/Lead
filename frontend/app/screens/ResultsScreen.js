@@ -39,8 +39,8 @@ function ResultsScreen({ navigation }) {
     await getAllEndedVotingSessions();
   };
 
-  const handlePressViewStatsButton = () => {
-    console.log("YO");
+  const handlePressViewStatsButton = (votingSessionId) => {
+    console.log("YO", votingSessionId);
   };
 
   return (
