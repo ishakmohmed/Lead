@@ -30,6 +30,8 @@ function ResultsScreen({ navigation }) {
 
     setAllVotingSessions(data.allVotingSessions.reverse());
 
+    console.log("well >>> ", data.allVotingSessions.reverse());
+
     setLoading(false);
   };
 

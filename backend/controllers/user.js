@@ -13,6 +13,16 @@ const getAllUsers = asyncHandler(async (req, res) => {
   }
 });
 
+const getDetailsOfAUser = asyncHandler(async (req, res) => {
+  const user = await User.find({ _id: mongoose.Types.ObjectId(req.id) });
+
+  if (user) res.json(user);
+  else {
+    res.status(404);
+    throw new Error("User does not exist.");
+  }
+});
+
 const authenticateUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -57,4 +67,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authenticateUser, getAllUsers, registerUser };
+export { authenticateUser, getAllUsers, getDetailsOfAUser, registerUser };
