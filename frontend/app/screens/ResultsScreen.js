@@ -39,6 +39,10 @@ function ResultsScreen({ navigation }) {
     await getAllEndedVotingSessions();
   };
 
+  const handlePressViewStatsButton = () => {
+    console.log("YO");
+  };
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -57,11 +61,13 @@ function ResultsScreen({ navigation }) {
                 <EachVotingResult
                   nameOfSession={vs.nameOfSession}
                   candidates={vs.candidates}
+                  highestVotersCount={vs.highestVotersCount}
                   dateEnded={vs.dateEnded}
                   winnerId={vs.winnerId}
                   creatorId={vs.creatorId}
                   key={index}
                   votingSessionId={vs._id}
+                  onPressViewStatsButton={handlePressViewStatsButton}
                 />
               );
             })}

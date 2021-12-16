@@ -7,13 +7,17 @@ import ActivityIndicatorForScrollableView from "../components/ActivityIndicatorF
 import HeadingText from "../components/HeadingText";
 import EachVotingSession from "../components/EachVotingSession";
 import useApi from "../hooks/useApi";
+import userApi from "../api/users";
 import votingApi from "../api/voting";
 import colors from "../config/colors";
 
 function VotingSessionsScreen({ navigation }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
-  const getAllOngoingVotingSessionsApi = useApi(votingApi.getAllOngoingVotingSessions);
+  const getAllOngoingVotingSessionsApi = useApi(
+    votingApi.getAllOngoingVotingSessions
+  );
+  const getDetailsOfAUserApi = useApi(userApi.getDetailsOfAUser);
   const [allVotingSessions, setAllVotingSessions] = useState([]);
   const [loading, setLoading] = useState(false);
 

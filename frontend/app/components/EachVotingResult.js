@@ -8,7 +8,12 @@ import AuthContext from "../auth/context";
 function EachVotingResult({
   nameOfSession,
   candidates,
+  highestVotersCount,
   dateEnded,
+  winnerId,
+  creatorId,
+  votingSessionId,
+  onPressViewStatsButton,
 }) {
   const { user } = useContext(AuthContext);
   let strDate = dateEnded;
@@ -33,6 +38,14 @@ function EachVotingResult({
             </TouchableOpacity>
           );
         })}
+      </View>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onPressViewStatsButton(votingSessionId)}
+        >
+          <Text style={styles.buttonText}>View Stats</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
