@@ -13,17 +13,32 @@ function StatisticsScreen({ navigation, route }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
   const [winner, setWinner] = useState({});
+  const [voteCountForWinner, setVoteCountForWinner] = useState(0);
+  const statistics = route.params.allVotingSessions[0];
+  const winnerId = route.params.allVotingSessions[0].winnerId;
 
   useEffect(() => {
     getDetailsOfAUser();
+    getVoteCountForWinner();
+
+    console.log(route.params.allVotingSessions[0]);
   }, []);
 
   const getDetailsOfAUser = async () => {
-    const data = await userApi.getDetailsOfAUser(
-      route.params.allVotingSessions[0].winnerId
-    );
+    const data = await userApi.getDetailsOfAUser(winnerId);
 
     setWinner(data.data.user);
+  };
+
+  const getVoteCountForWinner = () => {
+    const candidates = statistics.candidates;
+
+    for (let i = 0; i < candidates.length; i++) {
+      if (candidates[i]._id == winnerId) {
+        const result = candidates[i].voteCountForThisCandidate;
+        setVoteCountForWinner(result);
+      }
+    }
   };
 
   return (
@@ -39,6 +54,23 @@ function StatisticsScreen({ navigation, route }) {
           </TouchableOpacity>
           <View style={styles.winnerView}>
             <Text style={styles.text}>Winner: {winner.name}</Text>
+            <Text style={styles.text}>
+              Number of voters: {statistics.votersCount}
+            </Text>
+            <Text style={styles.text}>
+              Name of Session: {statistics.nameOfSession}
+            </Text>
+            <Text style={styles.text}>
+              Vote count for winner: {voteCountForWinner}
+            </Text>
+            <Text style={styles.text}>
+              Date created: {statistics.dateCreated}
+            </Text>
+            <Text style={styles.text}>Date ended: {statistics.dateEnded}</Text>
+            <Text>
+              Note: so now just display faces of winners and other candidates
+              and add confetti
+            </Text>
           </View>
         </View>
       </Screen>
