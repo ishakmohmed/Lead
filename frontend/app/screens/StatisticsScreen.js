@@ -19,13 +19,28 @@ function StatisticsScreen({ navigation, route }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <HeadingText>ABCDEFG</HeadingText>
+        <HeadingText>Statistics</HeadingText>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("ResultsScreen")}
+        >
+          <Ionicons name="arrow-back" size={25} color={colors.light} />
+        </TouchableOpacity>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: colors.black,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 10,
+    width: 70,
+  },
   container: {
     padding: 10,
     paddingLeft: 20,
