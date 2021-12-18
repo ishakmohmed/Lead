@@ -6,7 +6,7 @@ import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
 
-function ResultsScreen({ navigation }) {
+function StatisticsScreen({ navigation }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
   useEffect(() => {}, []);
@@ -14,7 +14,7 @@ function ResultsScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <HeadingText>Final Result</HeadingText>
+        <HeadingText>ABCDEFG</HeadingText>
       </View>
     </Screen>
   );
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ResultsScreen;
+export default StatisticsScreen;
