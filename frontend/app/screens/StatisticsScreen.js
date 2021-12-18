@@ -3,7 +3,9 @@ import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
+import ConfettiAnimation from "../components/confettiAnimation";
 import HeadingText from "../components/HeadingText";
+import Text from "../components/Text";
 import colors from "../config/colors";
 
 function StatisticsScreen({ navigation, route }) {
@@ -17,17 +19,24 @@ function StatisticsScreen({ navigation, route }) {
   }, []);
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <HeadingText>Statistics</HeadingText>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("ResultsScreen")}
-        >
-          <Ionicons name="arrow-back" size={25} color={colors.light} />
-        </TouchableOpacity>
-      </View>
-    </Screen>
+    <>
+      <Screen>
+        <View style={styles.container}>
+          <HeadingText>Statistics</HeadingText>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("ResultsScreen")}
+          >
+            <Ionicons name="arrow-back" size={25} color={colors.light} />
+          </TouchableOpacity>
+          <ConfettiAnimation />
+          <Text>Hello</Text>
+          <Text>Hello</Text>
+          <Text>Hello</Text>
+          <Text>Hello</Text>
+        </View>
+      </Screen>
+    </>
   );
 }
 
