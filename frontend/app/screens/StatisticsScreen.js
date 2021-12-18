@@ -6,10 +6,15 @@ import Screen from "../components/Screen";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
 
-function StatisticsScreen({ navigation }) {
+function StatisticsScreen({ navigation, route }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(
+      "route.params.allVotingSessions is > ",
+      route.params.allVotingSessions
+    );
+  }, []);
 
   return (
     <Screen>

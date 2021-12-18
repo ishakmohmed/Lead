@@ -6,15 +6,17 @@ import StatisticsScreen from "../screens/StatisticsScreen";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
-  <Stack.Navigator
-    screenOptions={{
-      headerTintColor: "white",
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
-    <Stack.Screen name="StatisticsScreen" component={StatisticsScreen} />
-  </Stack.Navigator>;
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
+      <Stack.Screen name="StatisticsScreen" component={StatisticsScreen} />
+    </Stack.Navigator>
+  );
 };
 
 export default function resultStackNavigator() {

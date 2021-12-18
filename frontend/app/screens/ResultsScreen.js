@@ -45,9 +45,7 @@ function ResultsScreen({ navigation }) {
         array = allVotingSessions[i];
     }
 
-    if (array)
-      // then navigate to the other screen
-      console.log("YO", votingSessionId);
+    if (array) navigation.navigate("StatisticsScreen", { allVotingSessions });
   };
 
   return (

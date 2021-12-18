@@ -5,6 +5,7 @@ import TabBar from "../components/TabBar";
 import ProfileScreen from "../screens/ProfileScreen";
 import AddSessionScreen from "../screens/AddSessionScreen";
 import ResultsScreen from "../screens/ResultsScreen";
+import resultStackNavigator from "./resultStackNavigator";
 import votingStackNavigator from "./votingStackNavigator";
 import routes from "./routes";
 
@@ -26,7 +27,7 @@ const AppNavigator = () => {
           headerShown: false,
         }}
         name={routes.RESULTS}
-        component={ResultsScreen}
+        component={resultStackNavigator}
         initialParams={{ icon: "trophy" }}
       />
       <Tab.Screen
