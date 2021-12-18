@@ -29,11 +29,9 @@ function StatisticsScreen({ navigation, route }) {
           >
             <Ionicons name="arrow-back" size={25} color={colors.light} />
           </TouchableOpacity>
-          <ConfettiAnimation />
-          <Text>Hello</Text>
-          <Text>Hello</Text>
-          <Text>Hello</Text>
-          <Text>Hello</Text>
+          <View style={styles.winnerView}>
+            <Text style={styles.text}>Winner</Text>
+          </View>
         </View>
       </Screen>
     </>
@@ -55,6 +53,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 0,
+  },
+  text: {
+    alignSelf: "center",
+    fontWeight: "bold",
+  },
+  winnerView: {
+    margin: 10,
+    padding: 10,
   },
 });
 

@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import mongoose from "mongoose";
 
 import generateToken from "../utils/generateToken.js";
 import User from "../models/user.js";
@@ -14,9 +15,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 const getDetailsOfAUser = asyncHandler(async (req, res) => {
-  const user = await User.find({ _id: mongoose.Types.ObjectId(req.id) });
+  const user = await User.find({ _id: mongoose.Types.ObjectId(req.params.id) });
 
-  if (user) res.json(user);
+  if (user) res.json({ user });
   else {
     res.status(404);
     throw new Error("User does not exist.");
