@@ -38,7 +38,16 @@ function ResultsScreen({ navigation }) {
   };
 
   const handlePressViewStatsButton = (votingSessionId) => {
-    console.log("YO", votingSessionId);
+    let array = [];
+
+    for (let i = 0; i < allVotingSessions.length; i++) {
+      if (allVotingSessions[i]._id.toString == votingSessionId)
+        array = allVotingSessions[i];
+    }
+
+    if (array)
+      // then navigate to the other screen
+      console.log("YO", votingSessionId);
   };
 
   return (
