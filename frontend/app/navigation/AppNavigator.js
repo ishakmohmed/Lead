@@ -2,7 +2,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import TabBar from "../components/TabBar";
-import LogoutScreen from "../screens/LogoutScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import AddSessionScreen from "../screens/AddSessionScreen";
 import ResultsScreen from "../screens/ResultsScreen";
