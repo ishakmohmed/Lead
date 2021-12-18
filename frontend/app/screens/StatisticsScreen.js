@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import ConfettiAnimation from "../components/confettiAnimation";
+import userApi from "../api/users";
 import HeadingText from "../components/HeadingText";
 import Text from "../components/Text";
 import colors from "../config/colors";
@@ -11,12 +12,19 @@ import colors from "../config/colors";
 function StatisticsScreen({ navigation, route }) {
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
 
+  const [winner, setWinner] = useState({});
+
   useEffect(() => {
-    console.log(
-      "route.params.allVotingSessions is > ",
-      route.params.allVotingSessions
-    );
+    getDetailsOfAUser();
   }, []);
+
+  const getDetailsOfAUser = async () => {
+    const data = await userApi.getDetailsOfAUser(
+      route.params.allVotingSessions[0].winnerId
+    );
+
+    setWinner(data.data.user);
+  };
 
   return (
     <>
@@ -30,7 +38,7 @@ function StatisticsScreen({ navigation, route }) {
             <Ionicons name="arrow-back" size={25} color={colors.light} />
           </TouchableOpacity>
           <View style={styles.winnerView}>
-            <Text style={styles.text}>Winner</Text>
+            <Text style={styles.text}>Winner: {winner.name}</Text>
           </View>
         </View>
       </Screen>

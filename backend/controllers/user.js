@@ -15,7 +15,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 const getDetailsOfAUser = asyncHandler(async (req, res) => {
-  const user = await User.find({ _id: mongoose.Types.ObjectId(req.params.id) });
+  const user = await User.findOne({
+    _id: mongoose.Types.ObjectId(req.params.id),
+  });
 
   if (user) res.json({ user });
   else {
