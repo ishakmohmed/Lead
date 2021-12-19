@@ -107,16 +107,11 @@ function StatisticsScreen({ navigation, route }) {
             })}
           </View>
           <Text style={styles.dateText}>candidates for this session</Text>
-          {/* <Text style={styles.text}>
-            Number of voters: {statistics.votersCount}
+          <Text style={styles.warningText}>
+            There was {statistics.votersCount}{" "}
+            {statistics.votersCount > 1 ? "voters" : "voter"} for this session.
+            Better luck next time to candidates who didn't win.
           </Text>
-          <Text style={styles.text}>
-            Vote count for winner: {voteCountForWinner}
-          </Text>
-          <Text>
-            Note: so now just display faces of winners and other candidates and
-            add confetti
-          </Text> */}
         </View>
       </Screen>
     </>
@@ -181,6 +176,14 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
     fontWeight: "bold",
+  },
+  warningText: {
+    backgroundColor: colors.nicePink,
+    borderRadius: 10,
+    color: "white",
+    fontWeight: "bold",
+    padding: 20,
+    marginTop: 50,
   },
   winnerView: {
     backgroundColor: colors.white,
