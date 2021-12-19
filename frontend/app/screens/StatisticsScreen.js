@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: "center",
+    fontSize: 22,
     fontWeight: "bold",
     marginTop: 20,
   },
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   winnerView: {
-    backgroundColor: colors.white,
+    backgroundColor: "transparent",
     margin: 10,
     alignItems: "center",
     marginTop: 20,
