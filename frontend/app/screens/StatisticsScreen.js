@@ -21,8 +21,8 @@ function StatisticsScreen({ navigation, route }) {
 
   const [winner, setWinner] = useState({});
   const [voteCountForWinner, setVoteCountForWinner] = useState(0);
-  const statistics = route.params.allVotingSessions[0];
-  const winnerId = route.params.allVotingSessions[0].winnerId;
+  const statistics = route.params.array;
+  const winnerId = route.params.array.winnerId;
   let startDate = statistics.dateCreated;
   let endDate = statistics.dateEnded;
 
@@ -33,7 +33,7 @@ function StatisticsScreen({ navigation, route }) {
     getDetailsOfAUser();
     getVoteCountForWinner();
 
-    console.log(route.params.allVotingSessions[0]);
+    // console.log(route.params.array);
   }, []);
 
   const getDetailsOfAUser = async () => {
@@ -41,7 +41,7 @@ function StatisticsScreen({ navigation, route }) {
 
     setWinner(data.data.user);
 
-    console.log("winner is ", data.data.user);
+    // console.log("winner is ", data.data.user);
   };
 
   const getVoteCountForWinner = () => {

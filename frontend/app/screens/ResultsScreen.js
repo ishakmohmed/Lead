@@ -38,14 +38,16 @@ function ResultsScreen({ navigation }) {
   };
 
   const handlePressViewStatsButton = (votingSessionId) => {
-    let array = [];
+    let array = null;
 
     for (let i = 0; i < allVotingSessions.length; i++) {
-      if (allVotingSessions[i]._id.toString == votingSessionId)
+      if (allVotingSessions[i]._id.toString() == votingSessionId)
         array = allVotingSessions[i];
     }
 
-    if (array) navigation.navigate("StatisticsScreen", { allVotingSessions });
+    // console.log("array isssssssssssssss #############", array);
+
+    if (array) navigation.navigate("StatisticsScreen", { array });
   };
 
   return (
@@ -72,7 +74,9 @@ function ResultsScreen({ navigation }) {
                   creatorId={vs.creatorId}
                   key={index}
                   votingSessionId={vs._id}
-                  onPressViewStatsButton={handlePressViewStatsButton}
+                  onPressViewStatsButton={() =>
+                    handlePressViewStatsButton(vs._id)
+                  }
                 />
               );
             })}
