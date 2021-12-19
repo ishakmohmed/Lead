@@ -51,7 +51,9 @@ function StatisticsScreen({ navigation, route }) {
     }
   };
 
-  console.log("HEY, ", statistics.candidates);
+  const percentageWonByWinner = Math.round(
+    (voteCountForWinner / statistics.votersCount) * 100
+  );
 
   return (
     <>
@@ -70,7 +72,7 @@ function StatisticsScreen({ navigation, route }) {
             {startDate} until {endDate}
           </Text>
           <View style={styles.winnerView}>
-            <View style={styles.faceAndTrophyContainer}>
+            <View style={styles.faceAndTrophyAndPercentageContainer}>
               <TouchableOpacity style={styles.makeItRound}>
                 <Image
                   source={{
@@ -82,6 +84,9 @@ function StatisticsScreen({ navigation, route }) {
                 />
               </TouchableOpacity>
               <FontAwesome5 name="trophy" size={24} color={colors.gold} />
+              <Text style={styles.percentageWonByWinnerText}>
+                {percentageWonByWinner}%
+              </Text>
             </View>
             <Text style={styles.winnerText}>Congrats, {winner.name}!</Text>
           </View>
@@ -102,7 +107,6 @@ function StatisticsScreen({ navigation, route }) {
             })}
           </View>
           <Text style={styles.dateText}>candidates for this session</Text>
-
           {/* <Text style={styles.text}>
             Number of voters: {statistics.votersCount}
           </Text>
@@ -150,12 +154,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.medium,
   },
-  faceAndTrophyContainer: {
+  faceAndTrophyAndPercentageContainer: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
     margin: 10,
+    width: "100%",
   },
   makeItRound: {
     alignItems: "center",
@@ -165,9 +170,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 50,
     justifyContent: "center",
-    marginRight: 20,
     overflow: "hidden",
     width: 50,
+  },
+  percentageWonByWinnerText: {
+    color: colors.nicePink,
+    fontSize: 40,
+    fontWeight: "bold",
   },
   text: {
     alignSelf: "center",
@@ -178,6 +187,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: "center",
     marginTop: 20,
+    marginBottom: 20,
     padding: 10,
   },
   winnerText: {
