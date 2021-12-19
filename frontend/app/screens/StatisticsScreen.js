@@ -176,12 +176,14 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
     fontWeight: "bold",
+    marginTop: 20,
   },
   warningText: {
     backgroundColor: colors.nicePink,
     borderRadius: 10,
     color: "white",
     fontWeight: "bold",
+    fontSize: 14,
     padding: 20,
     marginTop: 50,
   },
@@ -194,6 +196,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   winnerText: {
+    color: colors.medium,
+    fontSize: 14,
     fontWeight: "bold",
   },
 });

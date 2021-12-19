@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "white",
     fontWeight: "bold",
+    fontSize: 14,
     padding: 20,
     marginTop: 50,
   },
