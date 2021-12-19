@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Image,
+  ScrollView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
@@ -16,6 +22,11 @@ function StatisticsScreen({ navigation, route }) {
   const [voteCountForWinner, setVoteCountForWinner] = useState(0);
   const statistics = route.params.allVotingSessions[0];
   const winnerId = route.params.allVotingSessions[0].winnerId;
+  let startDate = statistics.dateCreated;
+  let endDate = statistics.dateEnded;
+
+  startDate = startDate.substring(0, 10);
+  endDate = endDate.substring(0, 10);
 
   useEffect(() => {
     getDetailsOfAUser();
@@ -28,6 +39,8 @@ function StatisticsScreen({ navigation, route }) {
     const data = await userApi.getDetailsOfAUser(winnerId);
 
     setWinner(data.data.user);
+
+    console.log("winner is ", data.data.user);
   };
 
   const getVoteCountForWinner = () => {
@@ -52,26 +65,34 @@ function StatisticsScreen({ navigation, route }) {
           >
             <Ionicons name="arrow-back" size={25} color={colors.light} />
           </TouchableOpacity>
-          <View style={styles.winnerView}>
+          <Text style={styles.text}>{statistics.nameOfSession}</Text>
+          <Text style={styles.dateText}>
+            {startDate} until {endDate}
+          </Text>
+          <View style={styles.winnerView}></View>
+          <TouchableOpacity key={index} style={styles.makeItRound}>
+            <Image
+              source={{
+                width: 50,
+                height: 50,
+                resizeMode: "cover",
+                uri: c.profilePic,
+              }}
+            />
+          </TouchableOpacity>
+          {/* <View style={styles.winnerView}>
             <Text style={styles.text}>Winner: {winner.name}</Text>
-            <Text style={styles.text}>
-              Number of voters: {statistics.votersCount}
-            </Text>
-            <Text style={styles.text}>
-              Name of Session: {statistics.nameOfSession}
-            </Text>
-            <Text style={styles.text}>
-              Vote count for winner: {voteCountForWinner}
-            </Text>
-            <Text style={styles.text}>
-              Date created: {statistics.dateCreated}
-            </Text>
-            <Text style={styles.text}>Date ended: {statistics.dateEnded}</Text>
-            <Text>
-              Note: so now just display faces of winners and other candidates
-              and add confetti
-            </Text>
           </View>
+          <Text style={styles.text}>
+            Number of voters: {statistics.votersCount}
+          </Text>
+          <Text style={styles.text}>
+            Vote count for winner: {voteCountForWinner}
+          </Text>
+          <Text>
+            Note: so now just display faces of winners and other candidates and
+            add confetti
+          </Text> */}
         </View>
       </Screen>
     </>
@@ -94,14 +115,27 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 0,
   },
+  dateText: {
+    alignSelf: "center",
+    fontSize: 12,
+    color: colors.medium,
+  },
+  makeItRound: {
+    alignItems: "center",
+    backgroundColor: colors.superLightGray,
+    borderRadius: 50 / 2,
+    borderColor: colors.superLightGray,
+    borderWidth: 1,
+    height: 50,
+    justifyContent: "center",
+    overflow: "hidden",
+    width: 50,
+  },
   text: {
     alignSelf: "center",
     fontWeight: "bold",
   },
-  winnerView: {
-    margin: 10,
-    padding: 10,
-  },
+  winnerView: {},
 });
 
 export default StatisticsScreen;
