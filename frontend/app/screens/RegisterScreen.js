@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
+import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import {
@@ -26,7 +27,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-function RegisterScreen() {
+function RegisterScreen({ navigation }) {
   const [error, setError] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
@@ -101,6 +102,12 @@ function RegisterScreen() {
     <>
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("welcome")}
+        >
+          <Ionicons name="arrow-back" size={25} color={colors.light} />
+        </TouchableOpacity>
         <HeadingText>Register</HeadingText>
         <Form
           initialValues={{ name: "", email: "", password: "" }}
@@ -156,6 +163,15 @@ function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: colors.black,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 10,
+    width: 70,
+  },
   container: {
     padding: 10,
     justifyContent: "center",

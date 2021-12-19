@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
+import { Ionicons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import {
@@ -14,7 +15,6 @@ import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
 import colors from "../config/colors";
 import HeadingText from "../components/HeadingText";
-import { Ionicons } from "@expo/vector-icons";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
