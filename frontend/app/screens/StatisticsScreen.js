@@ -72,7 +72,7 @@ function StatisticsScreen({ navigation, route }) {
             {startDate} until {endDate}
           </Text>
           <View style={styles.winnerView}>
-            <View>
+            <View style={styles.faceAndTrophyContainer}>
               <TouchableOpacity style={styles.makeItRound}>
                 <Image
                   source={{
@@ -85,12 +85,9 @@ function StatisticsScreen({ navigation, route }) {
               </TouchableOpacity>
               <FontAwesome5 name="trophy" size={24} color={colors.gold} />
             </View>
-            <Text style={styles.winnerText}>Winner, {winner.name}</Text>
+            <Text style={styles.winnerText}>Congrats, {winner.name}!</Text>
           </View>
-          {/* <View style={styles.winnerView}>
-            <Text style={styles.text}>Winner: {winner.name}</Text>
-          </View>
-          <Text style={styles.text}>
+          {/* <Text style={styles.text}>
             Number of voters: {statistics.votersCount}
           </Text>
           <Text style={styles.text}>
@@ -127,6 +124,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.medium,
   },
+  faceAndTrophyContainer: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 10,
+  },
   makeItRound: {
     alignItems: "center",
     backgroundColor: colors.superLightGray,
@@ -143,8 +147,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   winnerView: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     margin: 10,
+    alignItems: "center",
     marginTop: 20,
     padding: 10,
   },
