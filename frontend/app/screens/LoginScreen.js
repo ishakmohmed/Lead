@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
@@ -14,13 +14,14 @@ import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
 import colors from "../config/colors";
 import HeadingText from "../components/HeadingText";
+import { Ionicons } from "@expo/vector-icons";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
 
-function LoginScreen() {
+function LoginScreen({ navigation }) {
   const { logIn } = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
@@ -35,6 +36,12 @@ function LoginScreen() {
 
   return (
     <Screen style={styles.container}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("welcome")}
+      >
+        <Ionicons name="arrow-back" size={25} color={colors.light} />
+      </TouchableOpacity>
       <HeadingText>Login</HeadingText>
       <Form
         initialValues={{
@@ -75,6 +82,15 @@ function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: colors.black,
+    borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 10,
+    width: 70,
+  },
   container: {
     padding: 10,
     justifyContent: "center",
