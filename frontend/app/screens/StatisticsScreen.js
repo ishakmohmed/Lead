@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import ConfettiAnimation from "../components/confettiAnimation";
@@ -56,6 +57,7 @@ function StatisticsScreen({ navigation, route }) {
 
   return (
     <>
+      <ConfettiAnimation />
       <Screen>
         <View style={styles.container}>
           <HeadingText>Statistics</HeadingText>
@@ -69,17 +71,22 @@ function StatisticsScreen({ navigation, route }) {
           <Text style={styles.dateText}>
             {startDate} until {endDate}
           </Text>
-          <View style={styles.winnerView}></View>
-          <TouchableOpacity key={index} style={styles.makeItRound}>
-            <Image
-              source={{
-                width: 50,
-                height: 50,
-                resizeMode: "cover",
-                uri: c.profilePic,
-              }}
-            />
-          </TouchableOpacity>
+          <View style={styles.winnerView}>
+            <View>
+              <TouchableOpacity style={styles.makeItRound}>
+                <Image
+                  source={{
+                    width: 50,
+                    height: 50,
+                    resizeMode: "cover",
+                    uri: winner.profilePic,
+                  }}
+                />
+              </TouchableOpacity>
+              <FontAwesome5 name="trophy" size={24} color={colors.gold} />
+            </View>
+            <Text style={styles.winnerText}>Winner, {winner.name}</Text>
+          </View>
           {/* <View style={styles.winnerView}>
             <Text style={styles.text}>Winner: {winner.name}</Text>
           </View>
@@ -135,7 +142,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "bold",
   },
-  winnerView: {},
+  winnerView: {
+    backgroundColor: colors.light,
+    margin: 10,
+    marginTop: 20,
+    padding: 10,
+  },
+  winnerText: {
+    fontWeight: "bold",
+  },
 });
 
 export default StatisticsScreen;

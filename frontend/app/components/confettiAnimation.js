@@ -19,10 +19,11 @@ function ConfettiAnimation() {
 const styles = StyleSheet.create({
   overlay: {
     backgroundColor: colors.white,
-    opacity: 0.5,
+    opacity: 0.75,
+    position: "absolute",
     height: "100%",
     width: "100%",
-    zIndex: 1,
+    zIndex: -1,
   },
 });
 
