@@ -38,16 +38,14 @@ function ResultsScreen({ navigation }) {
   };
 
   const handlePressViewStatsButton = (votingSessionId) => {
-    let array = null;
+    let theSession = null;
 
     for (let i = 0; i < allVotingSessions.length; i++) {
       if (allVotingSessions[i]._id.toString() == votingSessionId)
-        array = allVotingSessions[i];
+        theSession = allVotingSessions[i];
     }
 
-    // console.log("array isssssssssssssss #############", array);
-
-    if (array) navigation.navigate("StatisticsScreen", { array });
+    if (theSession) navigation.navigate("StatisticsScreen", { theSession });
   };
 
   return (

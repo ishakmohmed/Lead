@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   selectedCandidatesContainer: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.superLightGray,
     borderRadius: 20,
     display: "flex",
     flexDirection: "row",

@@ -21,8 +21,8 @@ function StatisticsScreen({ navigation, route }) {
 
   const [winner, setWinner] = useState({});
   const [voteCountForWinner, setVoteCountForWinner] = useState(0);
-  const statistics = route.params.array;
-  const winnerId = route.params.array.winnerId;
+  const statistics = route.params.theSession;
+  const winnerId = route.params.theSession.winnerId;
   let startDate = statistics.dateCreated;
   let endDate = statistics.dateEnded;
 
@@ -32,16 +32,12 @@ function StatisticsScreen({ navigation, route }) {
   useEffect(() => {
     getDetailsOfAUser();
     getVoteCountForWinner();
-
-    // console.log(route.params.array);
   }, []);
 
   const getDetailsOfAUser = async () => {
     const data = await userApi.getDetailsOfAUser(winnerId);
 
     setWinner(data.data.user);
-
-    // console.log("winner is ", data.data.user);
   };
 
   const getVoteCountForWinner = () => {
@@ -54,6 +50,8 @@ function StatisticsScreen({ navigation, route }) {
       }
     }
   };
+
+  console.log("HEY, ", statistics.candidates);
 
   return (
     <>
@@ -87,6 +85,24 @@ function StatisticsScreen({ navigation, route }) {
             </View>
             <Text style={styles.winnerText}>Congrats, {winner.name}!</Text>
           </View>
+          <View style={styles.candidatesContainer}>
+            {statistics.candidates.map((c, index) => {
+              return (
+                <TouchableOpacity key={index} style={styles.makeItRound}>
+                  <Image
+                    source={{
+                      width: 50,
+                      height: 50,
+                      resizeMode: "cover",
+                      uri: c.profilePic,
+                    }}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <Text style={styles.dateText}>candidates for this session</Text>
+
           {/* <Text style={styles.text}>
             Number of voters: {statistics.votersCount}
           </Text>
@@ -112,6 +128,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
     width: 70,
+  },
+  candidatesContainer: {
+    backgroundColor: colors.superLightGray,
+    borderRadius: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    minHeight: 70,
+    marginVertical: 10,
+    padding: 10,
   },
   container: {
     padding: 10,
@@ -139,6 +165,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 50,
     justifyContent: "center",
+    marginRight: 20,
     overflow: "hidden",
     width: 50,
   },
