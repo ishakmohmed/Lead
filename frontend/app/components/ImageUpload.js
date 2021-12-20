@@ -58,7 +58,7 @@ function ImageUpload({
                 textAlign: "center",
               }}
             >
-              Profile Pic
+              Upload Pic
             </Text>
             <FontAwesome5
               name="cloud-upload-alt"
