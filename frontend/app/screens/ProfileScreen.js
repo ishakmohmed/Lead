@@ -122,14 +122,14 @@ function ProfileScreen() {
             setProfilePic={setProfilePic}
             setFullReponseFromImagePicker={setFullReponseFromImagePicker}
           />
-          <Text style={styles.text}>Name</Text>
+          <Text style={styles.text}>New Name</Text>
           <FormField
             autoCorrect={false}
             icon="account"
             name="name"
             placeholder="Name"
           />
-          <Text style={styles.text}>Email</Text>
+          <Text style={styles.text}>New Email</Text>
           <FormField
             autoCapitalize="none"
             autoCorrect={false}
@@ -139,7 +139,7 @@ function ProfileScreen() {
             placeholder="Email"
             textContentType="emailAddress"
           />
-          <Text style={styles.text}>Bio</Text>
+          <Text style={styles.text}>New Bio</Text>
           <FormField
             autoCapitalize="none"
             autoCorrect={false}
@@ -147,7 +147,7 @@ function ProfileScreen() {
             name="bio"
             placeholder="Bio..."
           />
-          <Text style={styles.text}>Password</Text>
+          <Text style={styles.text}>New Password</Text>
           <FormField
             autoCapitalize="none"
             autoCorrect={false}
@@ -157,6 +157,9 @@ function ProfileScreen() {
             secureTextEntry
             textContentType="password"
           />
+          <Text style={styles.smallText}>
+            Only fill-up new password if needed
+          </Text>
           <SubmitButton color="nicePink" title="Register" />
         </Form>
       </Screen>
@@ -180,6 +183,11 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  smallText: {
+    color: colors.medium,
+    fontSize: 12,
+    textAlign: "center",
   },
   text: {
     color: colors.black,
