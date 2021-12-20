@@ -65,7 +65,7 @@ function StatisticsScreen({ navigation, route }) {
             style={styles.button}
             onPress={() => navigation.navigate("ResultsScreen")}
           >
-            <Ionicons name="arrow-back" size={25} color={colors.light} />
+            <Ionicons name="arrow-back" size={24} color={colors.light} />
           </TouchableOpacity>
           <Text style={styles.text}>{statistics.nameOfSession}</Text>
           <Text style={styles.dateText}>

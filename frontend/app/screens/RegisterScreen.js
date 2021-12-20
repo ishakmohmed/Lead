@@ -106,7 +106,7 @@ function RegisterScreen({ navigation }) {
           style={styles.button}
           onPress={() => navigation.navigate("welcome")}
         >
-          <Ionicons name="arrow-back" size={25} color={colors.light} />
+          <Ionicons name="arrow-back" size={24} color={colors.light} />
         </TouchableOpacity>
         <HeadingText>Register</HeadingText>
         <Form

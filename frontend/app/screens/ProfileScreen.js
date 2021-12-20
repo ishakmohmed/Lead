@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 import {
@@ -105,8 +105,12 @@ function ProfileScreen() {
     <>
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
-        <Button color="blue" title="Logout!" onPress={() => setUser(null)} />
-        <HeadingText>Register</HeadingText>
+        <View style={styles.veryTopView}>
+          <TouchableOpacity style={styles.button} onPress={() => setUser(null)}>
+            <MaterialIcons name="logout" size={24} color={colors.white} />
+          </TouchableOpacity>
+          <HeadingText>Update</HeadingText>
+        </View>
         <Form
           initialValues={{ name: "", email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}
@@ -169,6 +173,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
     width: 70,
+    position: "absolute",
+    right: 0,
   },
   container: {
     padding: 10,
@@ -180,6 +186,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginTop: 5,
+  },
+  veryTopView: {
+    display: "flex",
+    flexDirection: "row",
   },
 });
 
