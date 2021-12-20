@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,9 +16,11 @@ import userApi from "../api/users";
 import useApi from "../hooks/useApi";
 import ActivityIndicator from "../components/ActivityIndicator";
 import Text from "../components/Text";
+import Button from "../components/Button";
 import colors from "../config/colors";
 import HeadingText from "../components/HeadingText";
 import ImageUpload from "../components/ImageUpload";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -27,7 +29,8 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const { user, setUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
@@ -102,6 +105,7 @@ function ProfileScreen({ navigation }) {
     <>
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
+        <Button color="blue" title="Logout!" onPress={() => setUser(null)} />
         <HeadingText>Register</HeadingText>
         <Form
           initialValues={{ name: "", email: "", password: "" }}
