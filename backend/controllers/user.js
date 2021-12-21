@@ -70,4 +70,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authenticateUser, getAllUsers, getDetailsOfAUser, registerUser };
+const updateUser = asyncHandler(async (req, res) => {
+  console.log("the request is ", req);
+});
+
+export { authenticateUser, getAllUsers, getDetailsOfAUser, registerUser, updateUser };
