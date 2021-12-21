@@ -84,28 +84,34 @@ function ProfileScreen() {
     try {
       console.log("userInfo is >>> ", userInfo);
 
-      if (!profilePic) return setError("Please upload a profile pic.");
-      else setError("");
+      // if (!profilePic) return setError("Please upload a profile pic.");
+      // else setError("");
 
-      const profilePicFromCloudinary =
-        await uploadPicToCloudinaryAndGetPicUrl();
+      // const profilePicFromCloudinary =
+      //   await uploadPicToCloudinaryAndGetPicUrl();
 
-      if (!profilePicFromCloudinary)
-        return setError("Please upload pic again.");
+      // if (!profilePicFromCloudinary)
+      //   return setError("Please upload pic again.");
 
-      userInfo.profilePic = profilePicFromCloudinary;
+      // userInfo.profilePic = profilePicFromCloudinary;
 
-      const result = await registerApi.request(userInfo);
+      // const result = await registerApi.request(userInfo);
 
-      if (!result.ok) {
-        if (result.data) setError(result.data.error);
-        else {
-          setError("An unexpected error occurred.");
-          console.log(result);
-        }
+      // if (!result.ok) {
+      //   if (result.data) setError(result.data.error);
+      //   else {
+      //     setError("An unexpected error occurred.");
+      //     console.log(result);
+      //   }
 
-        return;
-      }
+      //   return;
+      // }
+
+      // const { data: authToken } = await loginApi.request(
+      //   userInfo.email,
+      //   userInfo.password
+      // );
+      // auth.logIn(authToken);
     } catch (error) {
       return;
     }
@@ -136,32 +142,44 @@ function ProfileScreen() {
               setProfilePic={setProfilePic}
               setFullReponseFromImagePicker={setFullReponseFromImagePicker}
             />
-            <Text style={styles.text}>Name</Text>
+            <Text style={styles.text}>New Name</Text>
             <FormField
               autoCorrect={false}
               icon="account"
               name="name"
-              placeholder={user.name}
+              placeholder="Name"
+              // value={user.name}
+              onChangeText={(t) => {
+                setUser({ ...user, name: t });
+              }}
             />
-            <Text style={styles.text}>Email</Text>
+            <Text style={styles.text}>New Email</Text>
             <FormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
               keyboardType="email-address"
               name="email"
-              placeholder={user.email}
+              placeholder="Email"
               textContentType="emailAddress"
+              value={user.email}
+              onChangeText={(t) => {
+                setUser({ ...user, email: t });
+              }}
             />
-            <Text style={styles.text}>Bio</Text>
+            <Text style={styles.text}>New Bio</Text>
             <FormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="pen"
               name="bio"
-              placeholder={user.bio}
+              placeholder="Bio..."
+              value={user.bio}
+              onChangeText={(t) => {
+                setUser({ ...user, bio: t });
+              }}
             />
-            <Text style={styles.text}>Password</Text>
+            <Text style={styles.text}>New Password</Text>
             <FormField
               autoCapitalize="none"
               autoCorrect={false}
@@ -174,7 +192,7 @@ function ProfileScreen() {
             <Text style={styles.smallText}>
               Only fill-up new password if needed
             </Text>
-            <SubmitButton color="nicePink" title="Update" />
+            <SubmitButton color="nicePink" title="Register" />
           </Form>
         </ScrollView>
       </Screen>
