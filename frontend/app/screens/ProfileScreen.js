@@ -43,7 +43,7 @@ function ProfileScreen() {
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
     useState("");
-  const registerApi = useApi(userApi.register);
+  const updateUserApi = useApi(userApi.updateUser);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
 
@@ -100,9 +100,14 @@ function ProfileScreen() {
         userInfo.profilePic = profilePicFromCloudinary;
       }
 
-      console.log("userInfo is >>> ", userInfo);
-
-      const result = await registerApi.request(userInfo);
+      const result = await updateUserApi.request(
+        userInfo._id,
+        userInfo.name,
+        userInfo.bio,
+        userInfo.profilePic,
+        userInfo.password,
+        userInfo.email
+      );
 
       if (!result.ok) {
         if (result.data) setError(result.data.error);
@@ -120,7 +125,7 @@ function ProfileScreen() {
 
   return (
     <>
-      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <ActivityIndicator visible={updateUserApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
         <View style={styles.veryTopView}>
           <TouchableOpacity style={styles.button} onPress={() => setUser(null)}>
