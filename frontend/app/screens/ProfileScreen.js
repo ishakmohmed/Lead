@@ -30,6 +30,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function ProfileScreen() {
+  // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
+
   const { user, setUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [profilePic, setProfilePic] = useState("");
@@ -38,6 +40,19 @@ function ProfileScreen() {
   const registerApi = useApi(userApi.register);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
+
+  useEffect(() => {
+    getDetailsOfAUser();
+  }, []);
+
+  useEffect(() => console.log("CURRENT USER VALUE IS, ", user), [user]);
+
+  const getDetailsOfAUser = async () => {
+    const data = await userApi.getDetailsOfAUser(user.id);
+
+    setUser(data.data.user);
+    setProfilePic(data.data.user.profilePic);
+  };
 
   const uploadPicToCloudinaryAndGetPicUrl = async () => {
     let base64Img = `data:image/jpg;base64,${fullReponseFromImagePicker.base64}`;
@@ -128,6 +143,7 @@ function ProfileScreen() {
             icon="account"
             name="name"
             placeholder="Name"
+            value={user.name}
           />
           <Text style={styles.text}>New Email</Text>
           <FormField
@@ -138,6 +154,7 @@ function ProfileScreen() {
             name="email"
             placeholder="Email"
             textContentType="emailAddress"
+            value={user.email}
           />
           <Text style={styles.text}>New Bio</Text>
           <FormField
@@ -146,6 +163,7 @@ function ProfileScreen() {
             icon="pen"
             name="bio"
             placeholder="Bio..."
+            value={user.bio}
           />
           <Text style={styles.text}>New Password</Text>
           <FormField
