@@ -49,6 +49,10 @@ const votingSessionSchema = mongoose.Schema({
     type: Date,
     default: null,
   },
+  isDraw: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model("VotingSession", votingSessionSchema);

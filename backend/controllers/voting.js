@@ -86,6 +86,14 @@ const endAVotingSession = asyncHandler(async (req, res) => {
     }
   }
 
+  // for (let i = 0; i < arrayThatWillBeModified.length; i++) {
+  //       if (
+  //     arrayThatWillBeModified[i].voteCountForThisCandidate ==
+  //     winnerWithAllHisOrHerDetails.voteCountForThisCandidate
+  //   ) 
+    
+  // }
+
   await VotingSession.updateOne(
     {
       _id: mongoose.Types.ObjectId(req.params.id),
