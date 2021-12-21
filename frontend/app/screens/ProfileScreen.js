@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Image,
+  View,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import * as Yup from "yup";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -82,18 +88,19 @@ function ProfileScreen() {
 
   const handleSubmit = async (userInfo) => {
     try {
+      if (!profilePic) {
+        userInfo.profilePic = user.profilePic;
+      } else {
+        const profilePicFromCloudinary =
+          await uploadPicToCloudinaryAndGetPicUrl();
+
+        if (!profilePicFromCloudinary)
+          return setError("Please upload pic again.");
+
+        userInfo.profilePic = profilePicFromCloudinary;
+      }
+
       console.log("userInfo is >>> ", userInfo);
-
-      if (!profilePic) return setError("Please upload a profile pic.");
-      else setError("");
-
-      const profilePicFromCloudinary =
-        await uploadPicToCloudinaryAndGetPicUrl();
-
-      if (!profilePicFromCloudinary)
-        return setError("Please upload pic again.");
-
-      userInfo.profilePic = profilePicFromCloudinary;
 
       const result = await registerApi.request(userInfo);
 
@@ -131,11 +138,23 @@ function ProfileScreen() {
             validationSchema={validationSchema}
           >
             <ErrorMessage error={error} visible={error} />
-            <ImageUploadSmall
-              profilePic={profilePic}
-              setProfilePic={setProfilePic}
-              setFullReponseFromImagePicker={setFullReponseFromImagePicker}
-            />
+            <View style={styles.profilePicView}>
+              <TouchableOpacity style={styles.uploadBtn}>
+                <Image
+                  source={{
+                    width: "100%",
+                    height: "100%",
+                    resizeMode: "cover",
+                    uri: user.profilePic,
+                  }}
+                />
+              </TouchableOpacity>
+              <ImageUploadSmall
+                profilePic={profilePic}
+                setProfilePic={setProfilePic}
+                setFullReponseFromImagePicker={setFullReponseFromImagePicker}
+              />
+            </View>
             <Text style={styles.text}>Name</Text>
             <FormField
               autoCorrect={false}
@@ -171,9 +190,6 @@ function ProfileScreen() {
               secureTextEntry
               textContentType="password"
             />
-            <Text style={styles.smallText}>
-              Only fill-up new password if needed
-            </Text>
             <SubmitButton color="nicePink" title="Update" />
           </Form>
         </ScrollView>
@@ -199,19 +215,30 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  profilePicView: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
   scrollView: {
     marginBottom: 50,
-  },
-  smallText: {
-    color: colors.medium,
-    fontSize: 12,
-    textAlign: "center",
   },
   text: {
     color: colors.black,
     fontSize: 16,
     fontWeight: "bold",
     marginTop: 5,
+  },
+  uploadBtn: {
+    alignItems: "center",
+    backgroundColor: colors.superLightGray,
+    borderColor: colors.superLightGray,
+    borderRadius: 75 / 2,
+    borderWidth: 1,
+    height: 75,
+    overflow: "hidden",
+    width: 75,
   },
   veryTopView: {
     display: "flex",
