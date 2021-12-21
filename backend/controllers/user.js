@@ -82,7 +82,7 @@ const updateUser = asyncHandler(async (req, res) => {
   user.email = userInfo.email;
   user.profilePic = userInfo.profilePic;
   user.bio = userInfo.bio;
-  user.password = await bcrypt.hash(userInfo.profilePic, salt);
+  user.password = await bcrypt.hash(userInfo.password, salt);
 
   await user.save();
 });
