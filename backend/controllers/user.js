@@ -71,11 +71,24 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-  console.log("reached");
+  const { id, userInfo } = req.body;
 
-  console.log("the request is ", req.body);
-  // const { profilePic, name, email, bio, password } = req.body;
-  // const user = await User.findOne({ email });
+  console.log("reached", id);
+
+  const resp = await User.updateOne(
+    {
+      _id: mongoose.Types.ObjectId(id),
+    },
+    {
+      name: userInfo.name,
+      email: userInfo.email,
+      password: userInfo.password,
+      bio: userInfo.bio,
+      profilePic: userInfo.profilePic,
+    }
+  );
+
+  console.log("resp is >>>>>>>>>>>>>>>>>>>>>>>", resp);
 });
 
 export {
