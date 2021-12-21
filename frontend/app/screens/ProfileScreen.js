@@ -19,7 +19,7 @@ import Text from "../components/Text";
 import Button from "../components/Button";
 import colors from "../config/colors";
 import HeadingText from "../components/HeadingText";
-import ImageUpload from "../components/ImageUpload";
+import ImageUploadSmall from "../components/ImageUploadSmall";
 import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
@@ -132,7 +132,7 @@ function ProfileScreen() {
           validationSchema={validationSchema}
         >
           <ErrorMessage error={error} visible={error} />
-          <ImageUpload
+          <ImageUploadSmall
             profilePic={profilePic}
             setProfilePic={setProfilePic}
             setFullReponseFromImagePicker={setFullReponseFromImagePicker}
@@ -144,6 +144,10 @@ function ProfileScreen() {
             name="name"
             placeholder="Name"
             value={user.name}
+            onChangeText={(t) => {
+              setUser({ ...user, name: t });
+              setError(null);
+            }}
           />
           <Text style={styles.text}>New Email</Text>
           <FormField
