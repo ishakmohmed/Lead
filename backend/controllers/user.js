@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
 import generateToken from "../utils/generateToken.js";
@@ -72,23 +73,18 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const { id, userInfo } = req.body;
+  const salt = await bcrypt.genSalt(10);
+  let user = await User.findOne({
+    _id: mongoose.Types.ObjectId(id),
+  });
 
-  console.log("reached", id);
+  user.name = userInfo.name;
+  user.email = userInfo.email;
+  user.profilePic = userInfo.profilePic;
+  user.bio = userInfo.bio;
+  user.password = await bcrypt.hash(userInfo.profilePic, salt);
 
-  const resp = await User.updateOne(
-    {
-      _id: mongoose.Types.ObjectId(id),
-    },
-    {
-      name: userInfo.name,
-      email: userInfo.email,
-      password: userInfo.password,
-      bio: userInfo.bio,
-      profilePic: userInfo.profilePic,
-    }
-  );
-
-  console.log("resp is >>>>>>>>>>>>>>>>>>>>>>>", resp);
+  await user.save();
 });
 
 export {
