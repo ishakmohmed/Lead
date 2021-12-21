@@ -71,8 +71,11 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
+  console.log("reached");
+
   console.log("the request is ", req.body);
-  
+  // const { profilePic, name, email, bio, password } = req.body;
+  // const user = await User.findOne({ email });
 });
 
 export {

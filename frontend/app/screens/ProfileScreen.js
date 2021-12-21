@@ -51,8 +51,6 @@ function ProfileScreen() {
     getDetailsOfAUser();
   }, []);
 
-  useEffect(() => console.log("CURRENT USER VALUE IS, ", user), [user]);
-
   const getDetailsOfAUser = async () => {
     const data = await userApi.getDetailsOfAUser(user.id);
 
@@ -87,6 +85,8 @@ function ProfileScreen() {
   };
 
   const handleSubmit = async (userInfo) => {
+    console.log("MAN, THE USER IS ", user);
+
     try {
       if (!profilePic) {
         userInfo.profilePic = user.profilePic;
@@ -100,14 +100,7 @@ function ProfileScreen() {
         userInfo.profilePic = profilePicFromCloudinary;
       }
 
-      const result = await updateUserApi.request(
-        userInfo._id,
-        userInfo.name,
-        userInfo.bio,
-        userInfo.profilePic,
-        userInfo.password,
-        userInfo.email
-      );
+      const result = await updateUserApi.request(userInfo, user._id);
 
       if (!result.ok) {
         if (result.data) setError(result.data.error);
