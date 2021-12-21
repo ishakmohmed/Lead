@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import * as Yup from "yup";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -51,7 +51,6 @@ function ProfileScreen() {
     const data = await userApi.getDetailsOfAUser(user.id);
 
     setUser(data.data.user);
-    setProfilePic(data.data.user.profilePic);
   };
 
   const uploadPicToCloudinaryAndGetPicUrl = async () => {
@@ -126,64 +125,71 @@ function ProfileScreen() {
           </TouchableOpacity>
           <HeadingText>Update</HeadingText>
         </View>
-        <Form
-          initialValues={{ name: "", email: "", password: "" }}
-          onSubmit={(values) => handleSubmit(values)}
-          validationSchema={validationSchema}
-        >
-          <ErrorMessage error={error} visible={error} />
-          <ImageUploadSmall
-            profilePic={profilePic}
-            setProfilePic={setProfilePic}
-            setFullReponseFromImagePicker={setFullReponseFromImagePicker}
-          />
-          <Text style={styles.text}>New Name</Text>
-          <FormField
-            autoCorrect={false}
-            icon="account"
-            name="name"
-            placeholder="Name"
-            value={user.name}
-            onChangeText={(t) => {
-              setUser({ ...user, name: t });
-              setError(null);
-            }}
-          />
-          <Text style={styles.text}>New Email</Text>
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress"
-            value={user.email}
-          />
-          <Text style={styles.text}>New Bio</Text>
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="pen"
-            name="bio"
-            placeholder="Bio..."
-            value={user.bio}
-          />
-          <Text style={styles.text}>New Password</Text>
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock"
-            name="password"
-            placeholder="Password"
-            secureTextEntry
-            textContentType="password"
-          />
-          <Text style={styles.smallText}>
-            Only fill-up new password if needed
-          </Text>
-          <SubmitButton color="nicePink" title="Register" />
-        </Form>
+        <ScrollView style={styles.scrollView}>
+          <Form
+            initialValues={{ name: "", email: "", password: "" }}
+            onSubmit={(values) => handleSubmit(values)}
+            validationSchema={validationSchema}
+          >
+            <ErrorMessage error={error} visible={error} />
+            <ImageUploadSmall
+              profilePic={profilePic}
+              setProfilePic={setProfilePic}
+              setFullReponseFromImagePicker={setFullReponseFromImagePicker}
+            />
+            <Text style={styles.text}>New Name</Text>
+            <FormField
+              autoCorrect={false}
+              icon="account"
+              name="name"
+              placeholder="Name"
+              value={user.name}
+              onChangeText={(t) => {
+                setUser({ ...user, name: t });
+              }}
+            />
+            <Text style={styles.text}>New Email</Text>
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Email"
+              textContentType="emailAddress"
+              value={user.email}
+              onChangeText={(t) => {
+                setUser({ ...user, email: t });
+              }}
+            />
+            <Text style={styles.text}>New Bio</Text>
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="pen"
+              name="bio"
+              placeholder="Bio..."
+              value={user.bio}
+              onChangeText={(t) => {
+                setUser({ ...user, bio: t });
+              }}
+            />
+            <Text style={styles.text}>New Password</Text>
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              secureTextEntry
+              textContentType="password"
+            />
+            <Text style={styles.smallText}>
+              Only fill-up new password if needed
+            </Text>
+            <SubmitButton color="nicePink" title="Register" />
+          </Form>
+        </ScrollView>
       </Screen>
     </>
   );
@@ -205,6 +211,9 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  scrollView: {
+    marginBottom: 50,
   },
   smallText: {
     color: colors.medium,

@@ -49,17 +49,6 @@ function ImageUpload({
           />
         ) : (
           <>
-            <Text
-              style={{
-                color: colors.black,
-                fontSize: 12,
-                fontWeight: "bold",
-                margin: 10,
-                textAlign: "center",
-              }}
-            >
-              Upload Pic
-            </Text>
             <FontAwesome5
               name="cloud-upload-alt"
               size={20}
