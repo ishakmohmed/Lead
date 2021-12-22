@@ -5,10 +5,10 @@ const settings = {
     apiUrl: "http://192.168.1.5:5000",
   },
   staging: {
-    apiUrl: "http://192.168.1.5:5000",
+    apiUrl: "https://nodejs-backend-for-lead-app.herokuapp.com",
   },
   prod: {
-    apiUrl: "http://192.168.1.5:5000",
+    apiUrl: "https://nodejs-backend-for-lead-app.herokuapp.com",
   },
 };
 
