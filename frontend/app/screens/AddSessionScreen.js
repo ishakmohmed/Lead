@@ -12,6 +12,7 @@ import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import Text from "../components/Text";
+import UploadScreen from "./UploadScreen";
 import Button from "../components/Button";
 import HeadingText from "../components/HeadingText";
 import colors from "../config/colors";
@@ -43,6 +44,8 @@ function ProfileScreen() {
     []
   );
   const [search, setSearch] = useState("");
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const getAllUserApi = useApi(userApi.getAllUsers);
 
   // Note: useApi() below is not utilized to its max capabilities, because I forgot about what it can do earlier since I borrowed this hook from a previous project I worked on
@@ -64,12 +67,18 @@ function ProfileScreen() {
     if (selectedUsersAsCandidates.length < 2)
       return setHasErrorForCandidates(true);
 
-    addVotingSessionApi.request({
-      creatorId: user.id,
-      candidates: selectedUsersAsCandidates,
-      nameOfSession,
-    });
+    setUploadVisible(true);
 
+    addVotingSessionApi.request(
+      {
+        creatorId: user.id,
+        candidates: selectedUsersAsCandidates,
+        nameOfSession,
+      },
+      (progress) => setProgress(progress)
+    );
+
+    setUploadVisible(false);
     handleReset();
   };
 
@@ -153,6 +162,7 @@ function ProfileScreen() {
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen progress={progress} visible={uploadVisible} />
       <HeadingText>Add Session</HeadingText>
       <Form
         initialValues={{

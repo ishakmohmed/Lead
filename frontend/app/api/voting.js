@@ -1,7 +1,10 @@
 import client from "./client";
 
-const addVotingSession = (votingSessionData) =>
-  client.post("/api/votes", votingSessionData);
+const addVotingSession = (votingSessionData, onUploadProgress) =>
+  client.post("/api/votes", votingSessionData, {
+    onUploadProgress: (progress) =>
+      onUploadProgress(progress.loaded / progress.total),
+  });
 
 const getAllOngoingVotingSessions = () => {
   return client.get("/api/votes");
