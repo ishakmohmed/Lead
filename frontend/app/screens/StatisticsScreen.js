@@ -71,25 +71,27 @@ function StatisticsScreen({ navigation, route }) {
           <Text style={styles.dateText}>
             {startDate} until {endDate}
           </Text>
-          <View style={styles.winnerView}>
-            <View style={styles.faceAndTrophyAndPercentageContainer}>
-              <TouchableOpacity style={styles.makeItRound}>
-                <Image
-                  source={{
-                    width: 50,
-                    height: 50,
-                    resizeMode: "cover",
-                    uri: winner.profilePic,
-                  }}
-                />
-              </TouchableOpacity>
-              <FontAwesome5 name="trophy" size={24} color={colors.gold} />
-              <Text style={styles.percentageWonByWinnerText}>
-                {percentageWonByWinner}%
-              </Text>
+          {!statistics.isDraw && (
+            <View style={styles.winnerView}>
+              <View style={styles.faceAndTrophyAndPercentageContainer}>
+                <TouchableOpacity style={styles.makeItRound}>
+                  <Image
+                    source={{
+                      width: 50,
+                      height: 50,
+                      resizeMode: "cover",
+                      uri: winner.profilePic,
+                    }}
+                  />
+                </TouchableOpacity>
+                <FontAwesome5 name="trophy" size={24} color={colors.gold} />
+                <Text style={styles.percentageWonByWinnerText}>
+                  {percentageWonByWinner}%
+                </Text>
+              </View>
+              <Text style={styles.winnerText}>Congrats, {winner.name}!</Text>
             </View>
-            <Text style={styles.winnerText}>Congrats, {winner.name}!</Text>
-          </View>
+          )}
           <View style={styles.candidatesContainer}>
             {statistics.candidates.map((c, index) => {
               return (
@@ -107,11 +109,19 @@ function StatisticsScreen({ navigation, route }) {
             })}
           </View>
           <Text style={styles.dateText}>candidates for this session</Text>
-          <Text style={styles.warningText}>
-            There was {statistics.votersCount}{" "}
-            {statistics.votersCount > 1 ? "voters" : "voter"} for this session.
-            Better luck next time to candidates who didn't win.
-          </Text>
+          {!statistics.isDraw && (
+            <Text style={styles.warningText}>
+              There was {statistics.votersCount}{" "}
+              {statistics.votersCount > 1 ? "voters" : "voter"} for this
+              session. Better luck next time to candidates who didn't win.
+            </Text>
+          )}
+          {statistics.isDraw && (
+            <Text style={styles.anotherWarningText}>
+              There is no winner for this session. This session is considered a
+              draw.
+            </Text>
+          )}
         </View>
       </Screen>
     </>
@@ -119,6 +129,15 @@ function StatisticsScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  anotherWarningText: {
+    backgroundColor: colors.black,
+    borderRadius: 10,
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 14,
+    padding: 20,
+    marginTop: 50,
+  },
   button: {
     alignItems: "center",
     backgroundColor: colors.black,
