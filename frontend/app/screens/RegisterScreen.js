@@ -32,6 +32,7 @@ function RegisterScreen({ navigation }) {
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
     useState("");
+  const [isVisible, setIsVisible] = useState(false);
   const registerApi = useApi(userApi.register);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
@@ -64,6 +65,8 @@ function RegisterScreen({ navigation }) {
   };
 
   const handleSubmit = async (userInfo) => {
+    setIsVisible(true);
+
     try {
       if (!profilePic) return setError("Please upload a profile pic.");
       else setError("");
@@ -77,6 +80,8 @@ function RegisterScreen({ navigation }) {
       userInfo.profilePic = profilePicFromCloudinary;
 
       const result = await registerApi.request(userInfo);
+
+      setIsVisible(false);
 
       if (!result.ok) {
         if (result.data) setError(result.data.error);
@@ -100,7 +105,7 @@ function RegisterScreen({ navigation }) {
 
   return (
     <>
-      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <ActivityIndicator visible={isVisible} />
       <Screen style={styles.container}>
         <TouchableOpacity
           style={styles.button}
