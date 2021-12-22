@@ -73,7 +73,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const { id, userInfo } = req.body;
-  const salt = await bcrypt.genSalt(10);
   let user = await User.findOne({
     _id: mongoose.Types.ObjectId(id),
   });
@@ -84,7 +83,9 @@ const updateUser = asyncHandler(async (req, res) => {
   user.bio = userInfo.bio;
   user.password = userInfo.password;
 
-  await user.save();
+  const response = await user.save();
+
+  if (response) res.json({ response });
 });
 
 export {

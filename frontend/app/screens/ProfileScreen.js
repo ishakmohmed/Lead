@@ -85,8 +85,6 @@ function ProfileScreen() {
   };
 
   const handleSubmit = async (userInfo) => {
-    console.log("MAN, THE USER IS ", user);
-
     try {
       if (!profilePic) {
         userInfo.profilePic = user.profilePic;
@@ -111,6 +109,8 @@ function ProfileScreen() {
 
         return;
       }
+
+      // else, add a done animation
     } catch (error) {
       return;
     }
@@ -118,7 +118,7 @@ function ProfileScreen() {
 
   return (
     <>
-      <ActivityIndicator visible={updateUserApi.loading || loginApi.loading} />
+      <ActivityIndicator visible={updateUserApi.loading} />
       <Screen style={styles.container}>
         <View style={styles.veryTopView}>
           <TouchableOpacity style={styles.button} onPress={() => setUser(null)}>
