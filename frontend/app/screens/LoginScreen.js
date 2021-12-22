@@ -11,6 +11,7 @@ import {
   SubmitButton,
 } from "../components/forms";
 import Text from "../components/Text";
+import ActivityIndicator from "../components/ActivityIndicator";
 import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
 import colors from "../config/colors";
@@ -24,9 +25,14 @@ const validationSchema = Yup.object().shape({
 function LoginScreen({ navigation }) {
   const { logIn } = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
+    setIsVisible(true);
+
     const result = await authApi.login(email, password);
+
+    setIsVisible(false);
 
     if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
@@ -35,49 +41,52 @@ function LoginScreen({ navigation }) {
   };
 
   return (
-    <Screen style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("welcome")}
-      >
-        <Ionicons name="arrow-back" size={24} color={colors.light} />
-      </TouchableOpacity>
-      <HeadingText>Login</HeadingText>
-      <Form
-        initialValues={{
-          email: "",
-          password: "",
-        }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        <ErrorMessage
-          error="Invalid email and/or password"
-          visible={loginFailed}
-        />
-        <Text style={styles.text}>Email</Text>
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="masteruser@email.com"
-          textContentType="emailAddress"
-        />
-        <Text style={styles.text}>Password</Text>
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Masteruser975"
-          secureTextEntry
-          textContentType="password"
-        />
-        <SubmitButton color="blue" title="Login" />
-      </Form>
-    </Screen>
+    <>
+      <ActivityIndicator visible={isVisible} />
+      <Screen style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("welcome")}
+        >
+          <Ionicons name="arrow-back" size={24} color={colors.light} />
+        </TouchableOpacity>
+        <HeadingText>Login</HeadingText>
+        <Form
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          <ErrorMessage
+            error="Invalid email and/or password"
+            visible={loginFailed}
+          />
+          <Text style={styles.text}>Email</Text>
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            name="email"
+            placeholder="masteruser@email.com"
+            textContentType="emailAddress"
+          />
+          <Text style={styles.text}>Password</Text>
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            placeholder="Masteruser975"
+            secureTextEntry
+            textContentType="password"
+          />
+          <SubmitButton color="blue" title="Login" />
+        </Form>
+      </Screen>
+    </>
   );
 }
 
