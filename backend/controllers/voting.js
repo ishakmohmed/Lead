@@ -90,7 +90,8 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {
     if (
       arrayThatWillBeModified[i].voteCountForThisCandidate ==
-      winnerWithAllHisOrHerDetails.voteCountForThisCandidate
+        winnerWithAllHisOrHerDetails.voteCountForThisCandidate &&
+      arrayThatWillBeModified[i]._id != winnerWithAllHisOrHerDetails._id
     )
       isDraw = true;
   }
