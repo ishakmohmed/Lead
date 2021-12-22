@@ -17,6 +17,7 @@ import {
   ErrorMessage,
 } from "../components/forms";
 import useAuth from "../auth/useAuth";
+import UploadScreen from "./UploadScreen";
 import authApi from "../api/auth";
 import userApi from "../api/users";
 import useApi from "../hooks/useApi";
@@ -43,6 +44,8 @@ function ProfileScreen() {
   const [profilePic, setProfilePic] = useState("");
   const [fullReponseFromImagePicker, setFullReponseFromImagePicker] =
     useState("");
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const updateUserApi = useApi(userApi.updateUser);
   const loginApi = useApi(authApi.login);
   const auth = useAuth();
@@ -98,7 +101,15 @@ function ProfileScreen() {
         userInfo.profilePic = profilePicFromCloudinary;
       }
 
-      const result = await updateUserApi.request(userInfo, user._id);
+      setUploadVisible(true);
+
+      const result = await updateUserApi.request(
+        userInfo,
+        user._id,
+        (progress) => setProgress(progress)
+      );
+
+      setUploadVisible(false);
 
       if (!result.ok) {
         if (result.data) setError(result.data.error);
@@ -109,10 +120,8 @@ function ProfileScreen() {
 
         return;
       } else {
-        await getDetailsOfAUser();
+        setUser(null);
       }
-
-      // else, add a done animation
     } catch (error) {
       return;
     }
@@ -122,6 +131,7 @@ function ProfileScreen() {
     <>
       <ActivityIndicator visible={updateUserApi.loading} />
       <Screen style={styles.container}>
+        <UploadScreen progress={progress} visible={uploadVisible} />
         <View style={styles.veryTopView}>
           <TouchableOpacity style={styles.button} onPress={() => setUser(null)}>
             <MaterialIcons name="logout" size={24} color={colors.white} />
