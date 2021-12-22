@@ -74,6 +74,7 @@ const endAVotingSession = asyncHandler(async (req, res) => {
   let highestVotersCountForThisSession =
     arrayThatWillBeModified[0].voteCountForThisCandidate;
   let winnerWithAllHisOrHerDetails = arrayThatWillBeModified[0];
+  let isDraw = false;
 
   for (let i = 0; i < arrayThatWillBeModified.length; i++) {
     if (
@@ -86,25 +87,39 @@ const endAVotingSession = asyncHandler(async (req, res) => {
     }
   }
 
-  // for (let i = 0; i < arrayThatWillBeModified.length; i++) {
-  //       if (
-  //     arrayThatWillBeModified[i].voteCountForThisCandidate ==
-  //     winnerWithAllHisOrHerDetails.voteCountForThisCandidate
-  //   ) 
-    
-  // }
+  for (let i = 0; i < arrayThatWillBeModified.length; i++) {
+    if (
+      arrayThatWillBeModified[i].voteCountForThisCandidate ==
+      winnerWithAllHisOrHerDetails.voteCountForThisCandidate
+    )
+      isDraw = true;
+  }
 
-  await VotingSession.updateOne(
-    {
-      _id: mongoose.Types.ObjectId(req.params.id),
-    },
-    {
-      isGoingOn: false,
-      dateEnded: Date.now(),
-      winnerId: mongoose.Types.ObjectId(winnerWithAllHisOrHerDetails._id),
-      highestVotersCount: highestVotersCountForThisSession,
-    }
-  );
+  if (!isDraw) {
+    await VotingSession.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(req.params.id),
+      },
+      {
+        isGoingOn: false,
+        dateEnded: Date.now(),
+        winnerId: mongoose.Types.ObjectId(winnerWithAllHisOrHerDetails._id),
+        highestVotersCount: highestVotersCountForThisSession,
+      }
+    );
+  } else {
+    await VotingSession.updateOne(
+      {
+        _id: mongoose.Types.ObjectId(req.params.id),
+      },
+      {
+        isGoingOn: false,
+        dateEnded: Date.now(),
+        isDraw: true,
+        highestVotersCount: highestVotersCountForThisSession,
+      }
+    );
+  }
 });
 
 const updateVotingSessionWithNewVote = asyncHandler(async (req, res) => {
