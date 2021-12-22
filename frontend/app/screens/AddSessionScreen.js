@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import {
   Image,
   FlatList,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   TextInput,

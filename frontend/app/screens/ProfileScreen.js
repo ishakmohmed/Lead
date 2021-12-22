@@ -108,6 +108,8 @@ function ProfileScreen() {
         }
 
         return;
+      } else {
+        await getDetailsOfAUser();
       }
 
       // else, add a done animation
