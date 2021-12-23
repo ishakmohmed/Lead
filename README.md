@@ -1,4 +1,4 @@
-### Note to myself: you didn't use the custom hook called useApi to its maximum capabilities
+### Note to myself: you didn't use the custom hook called useApi to its maximum capabilities in this project.
 
 ### [1] See Live Version Immediately
 Since I don't have an iPhone or Mac yet as of the development of this app, I couldn't test the application on iPhone although this is a cross-platform app. If you're an Android user, you can head over to the following link to install the application's APK: https://drive.google.com/file/d/1nwjxhIJCalZeTouFtGETD8-4cdLHNpZF/view?usp=sharing
