@@ -41,7 +41,7 @@ Note: no design library is used. The entire UI of this application is built from
 ![Mohmed Ishak](https://user-images.githubusercontent.com/52876913/147257778-70f30c08-5cb1-44d6-8f5a-f685b4853ccb.png)
 
 ### [6] How to Run the Project Locally
-If you want to just view the completed, hosted version of this app, refer point 1 above. Otherwise, keep reading. Fork this repository and clone it to your machine. Make sure you've got Node, MongoDB, and Expo CLI installed on your machine. Also, install Expo Go on your mobile phone. You may Google how to do so as it's very simple and I don't want to pollute my README file and bore you with too much of instructions. In the backend folder, add a .env file and paste the following code:
+If you want to just view the completed, hosted version of this app, refer point 1 above. Otherwise, keep reading. Fork this repository and clone it to your machine. Make sure you've got Node, MongoDB, and Expo CLI installed on your machine. Also, install Expo Go on your mobile phone. You may Google how to do so as it's very simple and I don't want to pollute my README file and bore you with too much of instructions. In the backend folder, add a `.env` file and paste the following code:
     
     NODE_ENV=development
     PORT=5000
